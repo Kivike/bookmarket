@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CollectionAddActivity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".SellBookActivity" />
     </application>
 
 </manifest>

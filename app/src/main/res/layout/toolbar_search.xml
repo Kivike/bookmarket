@@ -12,4 +12,10 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
 
+        <SearchView
+            android:id="@+id/search_marketplace"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:title="Search" />
 </androidx.appcompat.widget.Toolbar>

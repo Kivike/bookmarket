@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar" />
+        <include layout="@layout/toolbar_search" android:id="@+id/toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,7 +26,9 @@
                 android:text="46 books in collection"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/search_collection"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="15dp"
+                />
 
             <LinearLayout
                 android:id="@+id/collection_buttons"
