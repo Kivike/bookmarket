@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:marginLeft="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/isbn_number"
