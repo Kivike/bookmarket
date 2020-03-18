@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/isbn_input_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:text="Find a book by ISBN number"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_toolbar"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/isbn_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="ISBN number"
+        app:layout_constraintTop_toBottomOf="@+id/isbn_input_label" />
+
+    <Button
+        android:id="@+id/btn_isbn_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        app:layout_constraintTop_toBottomOf="@+id/isbn_input"
+        tools:layout_editor_absoluteX="161dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/book_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/book_year_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="year of release"
+            tools:layout_editor_absoluteX="284dp"
+            tools:layout_editor_absoluteY="201dp" />
+
+        <TextView
+            android:id="@+id/book_author_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="author"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="265dp" />
+
+        <TextView
+            android:id="@+id/book_author_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Author"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteY="241dp" />
+
+        <TextView
+            android:id="@+id/book_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Book name"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteY="177dp" />
+
+        <TextView
+            android:id="@+id/book_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="book name"
+            tools:layout_editor_absoluteX="31dp"
+            tools:layout_editor_absoluteY="201dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:paddingLeft="20dp"
+            android:text="Year of release"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/book_name_label"
+            tools:layout_editor_absoluteY="177dp" />
+
+        <TextView
+            android:id="@+id/book_image_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take a picture"
+            app:layout_constraintTop_toBottomOf="@+id/book_author_value"
+            tools:layout_editor_absoluteX="154dp" />
+
+        <ImageView
+            android:id="@+id/book_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@+id/book_image_label"
+            app:srcCompat="@android:color/darker_gray"
+            tools:layout_editor_absoluteX="102dp" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="Mark as read"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_image" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:text="Sell"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@android:string/cancel"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox2"
+            tools:layout_editor_absoluteX="36dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="135dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="112dp"
+            android:text="Add"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            tools:layout_editor_absoluteY="567dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
