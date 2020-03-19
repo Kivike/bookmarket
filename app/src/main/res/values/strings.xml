@@ -18,4 +18,8 @@
     <string name="price">Price</string>
     <string name="condition">Condition</string>
     <string name="comments">Comments</string>
+
+    <string name="home">Home</string>
+    <string name="marketplace">Marketplace</string>
+    <string name="profile">Profile</string>
 </resources>

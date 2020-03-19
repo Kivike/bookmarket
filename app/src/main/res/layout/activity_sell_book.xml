@@ -26,7 +26,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:color/holo_red_light"
-
             />
 
         <TextView
