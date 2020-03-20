@@ -14,12 +14,13 @@
     <string name="take_picture">Take a picture</string>
     <string name="sell">Sell</string>
     <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
 
     <string name="price">Price</string>
     <string name="condition">Condition</string>
     <string name="comments">Comments</string>
 
-    <string name="home">Home</string>
+    <string name="collection">Collection</string>
     <string name="marketplace">Marketplace</string>
     <string name="profile">Profile</string>
 </resources>

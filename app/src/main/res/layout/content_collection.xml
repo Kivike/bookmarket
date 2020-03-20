@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorPrimary">
+
+    <TextView
+        android:id="@+id/search_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="46 books in collection"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/search_collection"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="15dp"
+        />
+
+
+    <Button
+        android:id="@+id/collection_sorting"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/sorting" />
+
+    <Button
+        android:id="@+id/collection_filters"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/collection_sorting"
+        app:layout_constraintRight_toRightOf="@id/collection_sorting"
+        android:text="@string/filters" />
+
+    <SearchView
+        android:id="@+id/search_collection"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/collection_filters"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/collection_sorting"
+         />
+
+    <ListView
+        android:id="@+id/collection_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="5dp"
+        android:clipToPadding="false"
+        android:dividerHeight="1sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_collection"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="?android:attr/colorBackground" />
+</androidx.constraintlayout.widget.ConstraintLayout>

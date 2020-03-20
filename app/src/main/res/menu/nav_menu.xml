@@ -3,7 +3,7 @@
     <group>
         <item
             android:id="@+id/nav_profile"
-            android:title="@string/home"/>
+            android:title="@string/collection"/>
         <item
             android:id="@+id/nav_messages"
             android:title="@string/marketplace"/>

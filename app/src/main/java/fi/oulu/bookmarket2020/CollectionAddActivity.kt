@@ -13,8 +13,8 @@ class CollectionAddActivity : AppCompatActivity() {
         this.configureToolbar()
     }
 
-    fun configureToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.app_toolbar)
+    private fun configureToolbar() {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setTitle(R.string.title_collection_add)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

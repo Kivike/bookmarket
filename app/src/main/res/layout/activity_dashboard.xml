@@ -16,62 +16,9 @@
 
         <include layout="@layout/toolbar_search" android:id="@+id/toolbar" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="#4FC3F7">
+        <include layout="@layout/content_collection" android:id="@+id/content" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="46 books in collection"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@id/search_collection"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="15dp"
-                />
 
-            <LinearLayout
-                android:id="@+id/collection_buttons"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <Button
-                    android:id="@+id/collection_sorting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="@string/sorting" />
-
-                <Button
-                    android:id="@+id/collection_filters"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="@string/filters" />
-            </LinearLayout>
-
-            <SearchView
-                android:id="@+id/search_collection"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
-                android:background="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/collection_buttons" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ListView
-            android:id="@+id/collection_list"
-            android:layout_width="match_parent"
-            android:layout_height="514dp"
-            android:clipToPadding="false" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -80,8 +27,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#FFFFFF"
-        android:fitsSystemWindows="true"
         android:divider="@android:color/darker_gray"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

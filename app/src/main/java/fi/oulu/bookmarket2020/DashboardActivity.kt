@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.content_collection.view.*
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,9 +41,23 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         navView.setNavigationItemSelectedListener(this)
 
         configureMarketplaceSearch()
-
     }
 
+    override fun onResume() {
+        super.onResume()
+        refreshCollectionList()
+    }
+
+    private fun refreshCollectionList() {
+        val reminders: MutableList<String> = ArrayList()
+
+        for (i in 1..15) {
+            reminders.add("Book name${i}")
+        }
+
+        val adapter = CollectionAdapter(applicationContext, reminders)
+        content.collection_list.adapter = adapter
+    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         Toast.makeText(this, "Clickity click", Toast.LENGTH_SHORT).show()
 
