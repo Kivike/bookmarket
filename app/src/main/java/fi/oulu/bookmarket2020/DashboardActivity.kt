@@ -39,8 +39,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-
-        configureMarketplaceSearch()
     }
 
     override fun onResume() {
@@ -63,13 +61,5 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    private fun configureMarketplaceSearch() {
-        searchView = findViewById(R.id.search_marketplace)
-        searchView.setOnClickListener {
-            searchView.isIconified = false
-        }
-        searchView.queryHint = "Search marketplace"
     }
 }
