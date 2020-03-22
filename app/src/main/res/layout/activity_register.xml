@@ -22,14 +22,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="First name"
-                android:id="@+id/fn"/>
+                android:id="@+id/fn"
+                android:textSize="16sp" />
             <EditText
                 android:id="@+id/edit_fn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="text"
-                android:layout_above="@+id/fn"/>
+                android:layout_above="@+id/fn"
+                android:textSize="16sp" />
         </TableRow>
 
         <TableRow>
@@ -45,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:textSize="16sp" />
         </TableRow>
 
         <TableRow>
@@ -55,7 +58,8 @@
                 android:layout_height="wrap_content"
                 android:text="Email Address"
                 tools:layout_editor_absoluteX="36dp"
-                tools:layout_editor_absoluteY="127dp" />
+                tools:layout_editor_absoluteY="127dp"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/edit_email"
@@ -64,7 +68,8 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 tools:layout_editor_absoluteX="34dp"
-                tools:layout_editor_absoluteY="215dp" />
+                tools:layout_editor_absoluteY="215dp"
+                android:textSize="16sp" />
         </TableRow>
 
         <TableRow>
@@ -74,13 +79,15 @@
                 android:layout_height="47dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Phone"/>
+                android:text="Phone"
+                android:textSize="16sp" />
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textSize="16sp"/>
         </TableRow>
 
         <TableRow>
@@ -88,7 +95,8 @@
                 android:id="@+id/pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Password" />
+                android:text="New Password"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/edit_pass"
@@ -96,7 +104,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textColor="@android:color/tertiary_text_light"
-                android:text="Enter your  Password"/>
+                android:text="Enter your  Password"
+                android:textSize="16sp" />
         </TableRow>
 
         <TableRow>
@@ -104,7 +113,8 @@
                 android:id="@+id/new_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Confirm Password" />
+                android:text="Confirm Password"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/edit_new_pass"
@@ -113,7 +123,8 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:textColor="@android:color/tertiary_text_light"
-                android:text="Enter your  Password"/>
+                android:text="Enter your  Password"
+                android:textSize="16sp" />
         </TableRow>
 
     </TableLayout>
