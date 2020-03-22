@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:ems="10"
-                android:inputType="phone"
+                android:inputType="text"
                 android:layout_above="@+id/fn"/>
         </TableRow>
 
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="phone"/>
+                android:inputType="text"/>
         </TableRow>
 
         <TableRow>
@@ -89,7 +89,8 @@
                 android:id="@+id/edit_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
+                android:textColor="@android:color/tertiary_text_light"
                 android:text="Enter your  Password"/>
         </TableRow>
 
@@ -105,7 +106,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
+                android:textColor="@android:color/tertiary_text_light"
                 android:text="Enter your  Password"/>
         </TableRow>
 
