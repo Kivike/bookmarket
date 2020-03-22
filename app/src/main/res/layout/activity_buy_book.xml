@@ -28,7 +28,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_centerHorizontal="true"
-                app:srcCompat="@android:color/holo_red_light" />
+                app:srcCompat="@drawable/darktower7" />
 
 
             <TableLayout
@@ -39,56 +39,64 @@
                 <TableRow>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="25dp"
                         android:text="Title"
                         android:id="@+id/abb_title"/>
-                    <EditText
+                    <TextView
                         android:id="@+id/abb_edit_title"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="25dp"
                         android:ems="10"
-                        android:inputType="text"/>
+                        android:text="The Dark Tower #7"/>
                 </TableRow>
 
                 <TableRow>
                     <TextView
-                        android:layout_height="50dp"
+                        android:layout_height="25dp"
                         android:layout_width="match_parent"
                         android:text="Authur"
                         android:id="@+id/abb_authur"/>
-                    <EditText
+                    <TextView
                         android:id="@+id/abb_edit_authur"
+                        android:text="Stephen King "
                         android:inputType="text"/>
                 </TableRow>
                 <TableRow>
                     <TextView
-                        android:layout_height="50dp"
+                        android:layout_height="25dp"
                         android:layout_width="match_parent"
                         android:text="Condition"
                         android:id="@+id/abb_condition"/>
-                    <EditText
+                    <TextView
                         android:id="@+id/abb_edit_condition"
+                        android:text="Almost New"
                         android:inputType="text"/>
                 </TableRow>
                 <TableRow>
                     <TextView
-                        android:layout_height="50dp"
+                        android:layout_height="25dp"
                         android:layout_width="match_parent"
-                        android:text="Authur"
+                        android:text="Price"
                         android:id="@+id/abb_price"/>
-                    <EditText
-                        android:id="@+id/abb_edit_price"
-                        android:inputType="number"/>
-                </TableRow>
-                <TableRow>
                     <TextView
-                        android:layout_height="50dp"
+                        android:id="@+id/abb_edit_price"
+                        android:text="9.99 €"/>
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent">
+
+                    <TextView
+                        android:id="@+id/abb_comment"
                         android:layout_width="match_parent"
-                        android:text="Comments"
-                        android:id="@+id/abb_comment"/>
-                    <EditText
+                        android:layout_height="25dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Comments" />
+
+                    <TextView
                         android:id="@+id/abb_edit_comment"
-                        android:inputType="textLongMessage"/>
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/book_comment" />
                 </TableRow>
             </TableLayout>
                 <LinearLayout
