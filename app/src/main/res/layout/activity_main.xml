@@ -7,4 +7,50 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_margin="25dp"
+        android:layout_marginBottom="100dp"
+        android:id="@+id/rl_main">
+
+        <ImageView
+            android:id="@+id/am_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/am_logo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book Market"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/am_logo"
+            android:layout_marginTop="25dp"
+            android:textSize="25sp"/>
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/am_logo_name"
+            android:layout_margin="50dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                android:id="@+id/am_signin"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Sign Up"
+                android:layout_below="@id/am_signin"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
