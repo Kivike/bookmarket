@@ -17,8 +17,6 @@
         <include layout="@layout/toolbar_search" android:id="@+id/toolbar" />
 
         <include layout="@layout/content_collection" android:id="@+id/content" />
-
-
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
