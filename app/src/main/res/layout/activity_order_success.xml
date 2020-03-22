@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Order Placed Successfully !"
-            android:textFontWeight="bold"
+            android:textStyle="bold"
             android:layout_below="@id/aos_img_success"
             android:id="@+id/aos_order_msg"
             android:textAlignment="center"

@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <EditText
+        android:id="@+id/search_marketplace"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_marginVertical="5dp"
@@ -14,6 +15,5 @@
         android:paddingLeft="15dp"
         android:hint="Search marketplace"
         android:drawableLeft="@drawable/ic_search"
-        android:drawablePadding="2dp"
-        />
+        android:drawablePadding="2dp" />
 </androidx.appcompat.widget.Toolbar>
