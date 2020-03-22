@@ -8,100 +8,108 @@
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
-    <RelativeLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_margin="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:id="@+id/rl_book_info">
-
-        <ImageView
-            android:id="@+id/abb_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@android:color/holo_red_light" />
-
-
-        <TableLayout
-            android:layout_width="match_parent"
+        <RelativeLayout
             android:layout_height="match_parent"
-            android:layout_below="@+id/abb_image">
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_margin="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:id="@+id/rl_book_info">
 
-            <TableRow>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Title"
-                    android:id="@+id/abb_title"/>
-                <EditText
-                    android:id="@+id/abb_edit_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:ems="10"
-                    android:inputType="text"/>
-            </TableRow>
+            <ImageView
+                android:id="@+id/abb_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/darktower7" />
 
-            <TableRow>
-                <TextView
-                    android:layout_height="50dp"
-                    android:layout_width="match_parent"
-                    android:text="Authur"
-                    android:id="@+id/abb_authur"/>
-                <EditText
-                    android:id="@+id/abb_edit_authur"
-                    android:inputType="text"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_height="50dp"
-                    android:layout_width="match_parent"
-                    android:text="Condition"
-                    android:id="@+id/abb_condition"/>
-                <EditText
-                    android:id="@+id/abb_edit_condition"
-                    android:inputType="text"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_height="50dp"
-                    android:layout_width="match_parent"
-                    android:text="Authur"
-                    android:id="@+id/abb_price"/>
-                <EditText
-                    android:id="@+id/abb_edit_price"
-                    android:inputType="number"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_height="50dp"
-                    android:layout_width="match_parent"
-                    android:text="Comments"
-                    android:id="@+id/abb_comment"/>
-                <EditText
-                    android:id="@+id/abb_edit_comment"
-                    android:inputType="textLongMessage"/>
-            </TableRow>
-        </TableLayout>
-            <LinearLayout
+
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/abb_image">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:text="Title"
+                        android:id="@+id/abb_title"/>
+                    <TextView
+                        android:id="@+id/abb_edit_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:ems="10"
+                        android:text="The Dark Tower #7"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_height="25dp"
+                        android:layout_width="match_parent"
+                        android:text="Authur"
+                        android:id="@+id/abb_authur"/>
+                    <TextView
+                        android:id="@+id/abb_edit_authur"
+                        android:text="Stephen King "
+                        android:inputType="text"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_height="25dp"
+                        android:layout_width="match_parent"
+                        android:text="Condition"
+                        android:id="@+id/abb_condition"/>
+                    <TextView
+                        android:id="@+id/abb_edit_condition"
+                        android:text="Almost New"
+                        android:inputType="text"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_height="25dp"
+                        android:layout_width="match_parent"
+                        android:text="Price"
+                        android:id="@+id/abb_price"/>
+                    <TextView
+                        android:id="@+id/abb_edit_price"
+                        android:text="9.99 €"/>
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent">
+
+                    <TextView
+                        android:id="@+id/abb_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Comments" />
+
+                    <TextView
+                        android:id="@+id/abb_edit_comment"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/book_comment" />
+                </TableRow>
+            </TableLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/abb_buy"
-                    android:text="Buy"/>
-            </LinearLayout>
-    </RelativeLayout>
+                    android:gravity="right"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/abb_buy"
+                        android:text="Buy"/>
+                </LinearLayout>
+        </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
