@@ -6,7 +6,7 @@
     <string name="title_collection_add">Add book to collection</string>
     <string name="title_sell_book">Sell book from collection</string>
 
-    <string name="find_book_by_isbn">Find book by ISBN number</string>
+    <string name="find_book_by_isbn">Find a book by ISBN number</string>
     <string name="isbn_number">ISBN number</string>
     <string name="book_title">Book title</string>
     <string name="author">Author</string>
