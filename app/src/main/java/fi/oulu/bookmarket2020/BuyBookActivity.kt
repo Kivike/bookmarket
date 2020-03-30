@@ -16,7 +16,7 @@ class BuyBookActivity : AppCompatActivity() {
     private fun configureToolbar() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle("Buy book")
+        supportActionBar?.title = "Buy book"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }

@@ -17,7 +17,6 @@ class MarketplaceAdapter(context: Context, private val list: List<String>) : Bas
         row.book_name.text = list[position]
         row.book_author.text ="Firstname Lastname"
         row.sale_status.text = ""
-        row.imageButton.visibility = View.GONE
 
         if (position % 4 != 0) {
             row.sale_status.text = position.toString() + " €"
