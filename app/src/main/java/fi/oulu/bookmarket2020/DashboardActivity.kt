@@ -1,6 +1,7 @@
 package fi.oulu.bookmarket2020
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -13,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import fi.oulu.bookmarket2020.model.CollectionBook
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.content_collection.*
 import kotlinx.android.synthetic.main.content_collection.view.*
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -30,14 +32,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         toolbar = findViewById(R.id.toolbar)
         navView = findViewById(R.id.nav_view)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
-
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-        navView.setNavigationItemSelectedListener(this)
+        initToolbar()
+        initAddBookButton()
     }
 
     override fun onResume() {
@@ -68,5 +64,23 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        navView.setNavigationItemSelectedListener(this)
+    }
+
+    private fun initAddBookButton() {
+        fab_add_book.setOnClickListener{
+            val intent = Intent(applicationContext, CollectionAddActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
