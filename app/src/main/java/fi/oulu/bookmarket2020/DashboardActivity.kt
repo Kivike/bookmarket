@@ -4,7 +4,6 @@ package fi.oulu.bookmarket2020
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import fi.oulu.bookmarket2020.model.CollectionBook
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.content_collection.view.*
 
@@ -30,7 +30,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         toolbar = findViewById(R.id.toolbar)
         navView = findViewById(R.id.nav_view)
 
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -47,15 +46,23 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
     private fun refreshCollectionList() {
-        val reminders: MutableList<String> = ArrayList()
+        val collection: MutableList<CollectionBook> = ArrayList()
 
         for (i in 1..15) {
-            reminders.add("Book name${i}")
+            val book = CollectionBook(
+                0,
+                "abc123",
+                "Test book $i",
+                "Test author $i"
+            )
+
+            collection.add(book)
         }
 
-        val adapter = CollectionAdapter(applicationContext, reminders)
+        val adapter = CollectionAdapter(applicationContext, this, collection)
         content.collection_list.adapter = adapter
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         Toast.makeText(this, "Clickity click", Toast.LENGTH_SHORT).show()
 

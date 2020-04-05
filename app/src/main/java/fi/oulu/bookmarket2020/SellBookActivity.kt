@@ -1,6 +1,5 @@
 package fi.oulu.bookmarket2020
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
@@ -12,6 +11,7 @@ class SellBookActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sell_book)
 
         configureToolbar()
+        setBookInfo()
     }
 
     private fun configureToolbar() {
@@ -20,5 +20,13 @@ class SellBookActivity : AppCompatActivity() {
         supportActionBar?.setTitle(R.string.title_sell_book)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    private fun setBookInfo() {
+        val bookId = intent.getIntExtra("book_id", 0)
+
+        if (bookId > 0) {
+            ///TODO load book data and set info
+        }
     }
 }
