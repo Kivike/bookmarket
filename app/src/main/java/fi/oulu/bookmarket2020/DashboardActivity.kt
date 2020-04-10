@@ -46,10 +46,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         for (i in 1..15) {
             val book = CollectionBook(
-                0,
-                "abc123",
-                "Test book $i",
-                "Test author $i"
+                uid = 0,
+                isbn = "abc123",
+                title = "Test book $i",
+                author = "Test author $i",
+                isRead = false
             )
 
             collection.add(book)

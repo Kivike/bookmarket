@@ -37,4 +37,7 @@ dependencies {
     implementation 'com.android.support:design:23.3.0'
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    implementation 'com.google.apis:google-api-services-books:v1-rev77-1.21.0'
+    implementation 'com.google.http-client:google-http-client-android:1.21.0'
+    implementation "org.jetbrains.anko:anko-design:$anko_version"
 }
