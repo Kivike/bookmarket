@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 import kotlinx.android.synthetic.main.collection_list_item.view.*
+import java.util.*
 
 val DATABASE_NAME = "Bookmarket_DB"
 val TABLE_NAME = "Bookmarket"
@@ -17,7 +18,7 @@ val COL_BOOK_READ = "book_already_read"
 val COL_BOOK_CONDITION = "book_condition"
 
 
-class DataBaseHnadler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1){
+class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1){
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -36,6 +37,7 @@ class DataBaseHnadler(var context: Context) : SQLiteOpenHelper(context, DATABASE
     fun inserData(bookmarket : MarketplaceAdapter) {
         //Getting the Write Database
         //TODO: get the content values for needed content
+        val id = UUID.randomUUID().toString()
         val db = this.writableDatabase
         var cv = ContentValues()
         cv.put(COL_BOOK_NAME, bookmarket.book_name)
