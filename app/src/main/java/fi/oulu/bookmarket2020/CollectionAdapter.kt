@@ -25,7 +25,7 @@ class CollectionAdapter(
 
         val book = getItem(position) as CollectionBook
 
-        row.book_name.text = book.name
+        row.book_name.text = book.title
         row.book_author.text = book.author
 
         if (position % 4 != 0) {
@@ -78,6 +78,6 @@ class CollectionAdapter(
     }
 
     private fun deleteCollectionBook(book: CollectionBook) {
-        Toast.makeText(activityContext, "Deleted book " + book.name, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activityContext, "Deleted book " + book.title, Toast.LENGTH_SHORT).show()
     }
 }

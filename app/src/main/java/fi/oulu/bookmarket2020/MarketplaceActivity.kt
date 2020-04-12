@@ -53,6 +53,7 @@ class MarketplaceActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val adapter = MarketplaceAdapter(applicationContext, reminders)
         content.collection_list.adapter = adapter
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         Toast.makeText(this, "Clickity click", Toast.LENGTH_SHORT).show()
 
