@@ -45,14 +45,15 @@
         android:id="@+id/book_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="name_label,name_value,year_label,year_value,author_label,author_value"
+        android:visibility="visible"
+        app:constraint_referenced_ids="title_label,title_value,year_label,year_value,author_label,author_value"
         />
 
     <TextView
         android:id="@+id/year_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2016"
+        android:text="-"
         app:layout_constraintEnd_toEndOf="@+id/year_label"
         app:layout_constraintTop_toBottomOf="@+id/year_label"
         android:textColor="#000"
@@ -63,7 +64,7 @@
         android:id="@+id/author_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="author"
+        android:text="-"
         app:layout_constraintEnd_toEndOf="@+id/author_label"
         app:layout_constraintTop_toBottomOf="@+id/author_label"
         android:textColor="#000"
@@ -78,11 +79,11 @@
         android:paddingLeft="20dp"
         android:text="@string/author"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/name_label"
-        app:layout_constraintTop_toBottomOf="@+id/name_value" />
+        app:layout_constraintEnd_toEndOf="@+id/title_label"
+        app:layout_constraintTop_toBottomOf="@+id/title_value" />
 
     <TextView
-        android:id="@+id/name_label"
+        android:id="@+id/title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -93,15 +94,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_isbn_input" />
 
     <TextView
-        android:id="@+id/name_value"
+        android:id="@+id/title_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="book name"
-        app:layout_constraintEnd_toEndOf="@+id/name_label"
-        app:layout_constraintTop_toBottomOf="@+id/name_label"
+        android:text="-"
+        app:layout_constraintEnd_toEndOf="@+id/title_label"
+        app:layout_constraintTop_toBottomOf="@+id/title_label"
         android:textColor="#000"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/year_label"
@@ -112,8 +112,8 @@
         android:text="@string/year_of_release"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/name_label"
-        app:layout_constraintTop_toTopOf="@+id/name_label" />
+        app:layout_constraintStart_toEndOf="@+id/title_label"
+        app:layout_constraintTop_toTopOf="@+id/title_label" />
 
     <TextView
         android:id="@+id/image_label"
@@ -127,50 +127,57 @@
 
     <ImageView
         android:id="@+id/book_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_label"
         app:srcCompat="@android:color/darker_gray" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cb_markread"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="20dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         android:text="Mark as read"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/book_image" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/cb_sell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="22dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         android:text="Sell"
-        app:layout_constraintStart_toStartOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_markread" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_back"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:text="@string/cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button2" />
+        app:layout_constraintTop_toTopOf="@+id/btn_submit" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_submit"
+        android:enabled="false"
         android:layout_width="135dp"
         android:layout_height="49dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/add"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintTop_toBottomOf="@+id/cb_sell" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
