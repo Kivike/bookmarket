@@ -74,7 +74,7 @@
 
         <TableRow>
             <TextView
-                android:id="@+id/edit_ph"
+                android:id="@+id/phone"
                 android:layout_width="100dp"
                 android:layout_height="47dp"
                 android:ems="10"
@@ -82,7 +82,7 @@
                 android:text="Phone"
                 android:textSize="16sp" />
             <EditText
-                android:id="@+id/phone"
+                android:id="@+id/edit_ph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"

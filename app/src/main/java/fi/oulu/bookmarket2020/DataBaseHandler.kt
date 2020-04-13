@@ -56,12 +56,15 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         onCreate(db)
     }
 
-    fun inserData(bookmarket : MarketplaceAdapter) {
+    fun inserData(bookmarket : RegisterActivity) {
         //Getting the Write Database
         //TODO: get the content values for needed content
         val db = this.writableDatabase
         var cv = ContentValues()
+
+        //Each required data row could be inserted in the db this way
         cv.put(COL_BOOK_NAME, bookmarket.book_name)
+
         var result = db.insert(TABLE_NAME, null, cv)
         if (result == -1.toLong())
             Toast.makeText(context, "Failed to insert data", Toast.LENGTH_SHORT).show()
@@ -69,8 +72,12 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
             Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
     }
 
-    fun getData(bookmarket : SellBookActivity) {
+    fun getData(bookmarket : LoginActivity) {
         //TODO: Read database
         val db = this.readableDatabase
+    }
+
+    fun updateData(bookmarket: RegisterActivity) {
+        // TODO: update data
     }
 }
