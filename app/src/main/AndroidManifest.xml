@@ -18,15 +18,16 @@
         <activity android:name=".OrderSuccessActivity"/>
         <activity android:name=".BuyBookActivity" />
         <activity android:name=".MarketplaceActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UsersListActivity"/>
         <activity android:name=".CollectionAddActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".SellBookActivity" />
