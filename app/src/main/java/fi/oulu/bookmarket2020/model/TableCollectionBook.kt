@@ -9,5 +9,6 @@ data class CollectionBook(
     @ColumnInfo(name = "isbn") var isbn: String,
     @ColumnInfo(name = "title") var title: String,
     @ColumnInfo(name = "author") var author: String,
-    @ColumnInfo(name = "is_read") var isRead: Boolean
+    @ColumnInfo(name = "is_read") var isRead: Boolean,
+    @ColumnInfo(name = "picture_path") var picturePath: String?
 )

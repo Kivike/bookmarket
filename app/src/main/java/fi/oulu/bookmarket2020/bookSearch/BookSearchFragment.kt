@@ -3,6 +3,7 @@ package fi.oulu.bookmarket2020.bookSearch
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.api.services.books.model.Volume
+import kotlin.Exception
 
 class BookSearchFragment : Fragment(), SearchListener {
 
@@ -14,11 +15,15 @@ class BookSearchFragment : Fragment(), SearchListener {
 
     private var lastResult: Volume? = null
 
-    fun searchByIsbn(isbn: String) {
+    /**
+     * @return Boolean Returns true if search was started
+     * @throws Exception
+     */
+    fun searchByIsbn(isbn: String): Boolean {
         val validIsbn = formatIsbn(isbn)
 
         if (validIsbn == lastIsbn) {
-            return
+            return isSearching
         }
 
         if (searchTask != null) {
@@ -29,6 +34,7 @@ class BookSearchFragment : Fragment(), SearchListener {
         searchTask!!.listener = this
         searchTask!!.execute(validIsbn)
         isSearching = true
+        return isSearching
     }
 
     private fun formatIsbn(isbn: String): String {

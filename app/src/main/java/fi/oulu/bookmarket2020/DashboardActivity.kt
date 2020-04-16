@@ -50,7 +50,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 isbn = "abc123",
                 title = "Test book $i",
                 author = "Test author $i",
-                isRead = false
+                isRead = false,
+                picturePath = null
             )
 
             collection.add(book)
