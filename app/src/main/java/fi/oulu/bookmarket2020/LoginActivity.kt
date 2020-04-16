@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
+
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private val activity = this@LoginActivity
@@ -27,12 +28,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        supportActionBar!!.hide()
+        // hiding the action bar
+        supportActionBar?.hide()
+        // initializing the views
         initViews()
+        // initializing the listeners
         initListeners()
+        // initializing the objects
         initObjects()
     }
 
+    /**
+     * This method is to initialize views
+     */
     private fun initViews() {
         nestedScrollView = findViewById<View>(R.id.nestedScrollView) as NestedScrollView
         textInputLayoutEmail = findViewById<View>(R.id.textInputLayoutEmail) as TextInputLayout
@@ -43,41 +51,90 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         textViewLinkRegister = findViewById<View>(R.id.textViewLinkRegister) as AppCompatTextView
     }
 
+    /**
+     * This method is to initialize listeners
+     */
     private fun initListeners() {
         appCompatButtonLogin!!.setOnClickListener(this)
         textViewLinkRegister!!.setOnClickListener(this)
     }
 
+    /**
+     * This method is to initialize objects to be used
+     */
     private fun initObjects() {
         databaseHelper = DatabaseHelper(activity)
         inputValidation = InputValidation(activity)
     }
 
+    /**
+     * This implemented method is to listen the click on view
+     *
+     * @param v
+     */
     override fun onClick(v: View) {
         when (v.id) {
             R.id.appCompatButtonLogin -> verifyFromSQLite()
-            R.id.textViewLinkRegister-> {
+            R.id.textViewLinkRegister -> {
+                // Navigate to RegisterActivity
                 val intentRegister = Intent(applicationContext, RegisterActivity::class.java)
                 startActivity(intentRegister)
             }
         }
     }
 
+    /**
+     * This method is to validate the input text fields and verify login credentials from SQLite
+     */
     private fun verifyFromSQLite() {
-        if (!inputValidation!!.isInputEditTextFilled(textInputEditTextEmail!!, textInputLayoutEmail!!, "Enter Valid Email")){ return }
-        if (!inputValidation!!.isInputEditTextEmail(textInputEditTextEmail!!, textInputLayoutEmail!!, "Enter Valid Email")) { return }
-        if (!inputValidation!!.isInputEditTextFilled(textInputEditTextPassword!!, textInputLayoutPassword!!, "Invalid Password")) { return }
-        if (databaseHelper!!.checkUser(textInputEditTextEmail!!.text.toString().trim(){it <= ' ' },
-            textInputEditTextPassword!!.text.toString().trim(){it <= ' '})){
-            val  accountsIntent = Intent(activity, UsersListActivity::class.java)
-            accountsIntent.putExtra("Email", textInputEditTextEmail!!.text.toString().trim(){it <= ' '})
+        if (!inputValidation!!.isInputEditTextFilled(
+                textInputEditTextEmail!!,
+                textInputLayoutEmail!!,
+                getString(R.string.error_message_email)
+            )
+        ) {
+            return
+        }
+        if (!inputValidation!!.isInputEditTextEmail(
+                textInputEditTextEmail!!,
+                textInputLayoutEmail!!,
+                getString(R.string.error_message_email)
+            )
+        ) {
+            return
+        }
+        if (!inputValidation!!.isInputEditTextFilled(
+                textInputEditTextPassword!!,
+                textInputLayoutPassword!!,
+                getString(R.string.error_message_email)
+            )
+        ) {
+            return
+        }
+
+        if (databaseHelper.checkUser(
+                textInputEditTextEmail.text.toString().trim { it <= ' ' },
+                textInputEditTextPassword.text.toString().trim { it <= ' ' })
+        ) {
+            val accountsIntent = Intent(activity, UsersListActivity::class.java)
+            accountsIntent.putExtra(
+                "EMAIL",
+                textInputEditTextEmail!!.text.toString().trim { it <= ' ' })
             emptyInputEditText()
             startActivity(accountsIntent)
         } else {
-            Snackbar.make(nestedScrollView!!, "Wrong Email or Password", Snackbar.LENGTH_LONG).show()
+            // Snack Bar to show success message that record is wrong
+            Snackbar.make(
+                nestedScrollView!!,
+                getString(R.string.error_valid_email_password),
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 
+    /**
+     * This method is to empty all input edit text
+     */
     private fun emptyInputEditText() {
         textInputEditTextEmail!!.text = null
         textInputEditTextPassword!!.text = null

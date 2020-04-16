@@ -7,12 +7,12 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import fi.oulu.bookmarket2020.model.User
 
-class UsersRecyclerAdapter (private val listUsers: List<User>) : RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): UserViewHolder {
-        val  itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_user_recycler, parent, false)
+class UsersRecyclerAdapter(private val listUsers: List<User>) : RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        // inflating recycler item view
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_user_recycler, parent, false)
         return UserViewHolder(itemView)
     }
 
@@ -26,7 +26,11 @@ class UsersRecyclerAdapter (private val listUsers: List<User>) : RecyclerView.Ad
         return listUsers.size
     }
 
+    /**
+     * ViewHolder class
+     */
     inner class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         var textViewName: AppCompatTextView
         var textViewEmail: AppCompatTextView
         var textViewPassword: AppCompatTextView
