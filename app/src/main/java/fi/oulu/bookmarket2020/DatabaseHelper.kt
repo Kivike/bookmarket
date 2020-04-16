@@ -11,7 +11,28 @@ import java.util.*
 class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    // create table sql query
+    companion object {
+        private val DATABASE_VERSION = 1
+        private val DATABASE_NAME = "Bookmarket_DB"
+        private val TABLE_USER = "Bookmarket"
+        private val COLUMN_USER_ID = "user_id"
+        private val COLUMN_USER_NAME = "user_name"
+        private val COLUMN_USER_EMAIL = "user_email"
+        private val COLUMN_USER_PHONE = "user_phone"
+        private val COLUMN_USER_PASSWORD = "user_password"
+
+        // TODO: These column could be created for book sell and buy feature
+        private val COLUMN_BOOK_NAME = "book_name"
+        private val COLUMN_BOOK_SALEABLE ="book_saleable"
+        private val COLUMN_BOOK_READ = "book_already_read"
+        private val COLUMN_BOOK_CONDITION = "book_condition"
+        private val COLUMN_ISBN_NUMBER = "isbn number"
+        private val COLUMN_PRICE = "price"
+        private val COLUMN_COMMENTS = "comments"
+        private val COLUMN_EDITION = "edition"
+        private val COLUMN_AUTHOR = "author"
+    }
+
     private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_USER_NAME + " TEXT,"
@@ -133,8 +154,6 @@ class DatabaseHelper(context: Context) :
             arrayOf(user.id.toString())
         )
         db.close()
-
-
     }
 
     /**
@@ -171,7 +190,6 @@ class DatabaseHelper(context: Context) :
             null
         )  //The sort order
 
-
         val cursorCount = cursor.count
         cursor.close()
         db.close()
@@ -179,22 +197,6 @@ class DatabaseHelper(context: Context) :
         if (cursorCount > 0) {
             return true
         }
-
         return false
-    }
-
-    companion object {
-        // Database Version
-        private val DATABASE_VERSION = 1
-        // Database Name
-        private val DATABASE_NAME = "UserManager.db"
-        // User table name
-        private val TABLE_USER = "user"
-        // User Table Columns names
-        private val COLUMN_USER_ID = "user_id"
-        private val COLUMN_USER_NAME = "user_name"
-        private val COLUMN_USER_EMAIL = "user_email"
-        private val COLUMN_USER_PHONE = "user_phone"
-        private val COLUMN_USER_PASSWORD = "user_password"
     }
 }
