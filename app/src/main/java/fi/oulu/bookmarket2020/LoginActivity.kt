@@ -116,7 +116,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 textInputEditTextEmail.text.toString().trim { it <= ' ' },
                 textInputEditTextPassword.text.toString().trim { it <= ' ' })
         ) {
-            val accountsIntent = Intent(activity, UsersListActivity::class.java)
+            val accountsIntent = Intent(activity, DashboardActivity::class.java)
             accountsIntent.putExtra(
                 "EMAIL",
                 textInputEditTextEmail!!.text.toString().trim { it <= ' ' })

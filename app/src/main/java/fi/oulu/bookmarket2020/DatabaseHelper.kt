@@ -13,8 +13,11 @@ class DatabaseHelper(context: Context) :
 
     // create table sql query
     private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")")
+            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_USER_NAME + " TEXT,"
+            + COLUMN_USER_EMAIL + " TEXT,"
+            + COLUMN_USER_PHONE + " INTEGER,"
+            + COLUMN_USER_PASSWORD + " TEXT" + ")")
     // drop table sql query
     private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
 
@@ -40,7 +43,7 @@ class DatabaseHelper(context: Context) :
 
         // array of columns to fetch
         val columns =
-            arrayOf(COLUMN_USER_ID, COLUMN_USER_EMAIL, COLUMN_USER_NAME, COLUMN_USER_PASSWORD)
+            arrayOf(COLUMN_USER_ID, COLUMN_USER_EMAIL, COLUMN_USER_PHONE, COLUMN_USER_NAME, COLUMN_USER_PASSWORD)
         // sorting orders
         val sortOrder = "$COLUMN_USER_NAME ASC"
         val userList = ArrayList<User>()
@@ -62,6 +65,7 @@ class DatabaseHelper(context: Context) :
                     id = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID)).toInt(),
                     name = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)),
                     email = cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)),
+                    phone = cursor.getString(cursor.getColumnIndex(COLUMN_USER_PHONE)).toInt(),
                     password = cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD))
                 )
 
@@ -85,6 +89,7 @@ class DatabaseHelper(context: Context) :
         val values = ContentValues()
         values.put(COLUMN_USER_NAME, user.name)
         values.put(COLUMN_USER_EMAIL, user.email)
+        values.put(COLUMN_USER_PHONE, user.phone)
         values.put(COLUMN_USER_PASSWORD, user.password)
 
         // Inserting Row
@@ -103,6 +108,7 @@ class DatabaseHelper(context: Context) :
         val values = ContentValues()
         values.put(COLUMN_USER_NAME, user.name)
         values.put(COLUMN_USER_EMAIL, user.email)
+        values.put(COLUMN_USER_PHONE, user.phone)
         values.put(COLUMN_USER_PASSWORD, user.password)
 
         // updating row
@@ -188,6 +194,7 @@ class DatabaseHelper(context: Context) :
         private val COLUMN_USER_ID = "user_id"
         private val COLUMN_USER_NAME = "user_name"
         private val COLUMN_USER_EMAIL = "user_email"
+        private val COLUMN_USER_PHONE = "user_phone"
         private val COLUMN_USER_PASSWORD = "user_password"
     }
 }

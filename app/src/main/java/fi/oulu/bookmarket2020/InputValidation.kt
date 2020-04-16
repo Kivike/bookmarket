@@ -37,7 +37,6 @@ class InputValidation
         } else {
             textInputLayout.isErrorEnabled = false
         }
-
         return true
     }
 

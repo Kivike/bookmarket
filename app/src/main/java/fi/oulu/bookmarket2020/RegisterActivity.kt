@@ -19,10 +19,12 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var textInputLayoutName: TextInputLayout
     private lateinit var textInputLayoutEmail: TextInputLayout
+    private lateinit var textInputLayoutPhone: TextInputLayout
     private lateinit var textInputLayoutPassword: TextInputLayout
     private lateinit var textInputLayoutConfirmPassword: TextInputLayout
     private lateinit var textInputEditTextName: TextInputEditText
     private lateinit var textInputEditTextEmail: TextInputEditText
+    private lateinit var textInputEditTextPhone: TextInputEditText
     private lateinit var textInputEditTextPassword: TextInputEditText
     private lateinit var textInputEditTextConfirmPassword: TextInputEditText
     private lateinit var appCompatButtonRegister: AppCompatButton
@@ -59,21 +61,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         nestedScrollView = findViewById<View>(R.id.nestedScrollView) as NestedScrollView
         textInputLayoutName = findViewById<View>(R.id.textInputLayoutName) as TextInputLayout
         textInputLayoutEmail = findViewById<View>(R.id.textInputLayoutEmail) as TextInputLayout
-        textInputLayoutPassword =
-            findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout
-        textInputLayoutConfirmPassword =
-            findViewById<View>(R.id.textInputLayoutConfirmPassword) as TextInputLayout
+        textInputLayoutPhone = findViewById<View>(R.id.textInputLayoutPhone) as TextInputLayout
+        textInputLayoutPassword = findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout
+        textInputLayoutConfirmPassword = findViewById<View>(R.id.textInputLayoutConfirmPassword) as TextInputLayout
         textInputEditTextName = findViewById<View>(R.id.textInputEditTextName) as TextInputEditText
-        textInputEditTextEmail =
-            findViewById<View>(R.id.textInputEditTextEmail) as TextInputEditText
-        textInputEditTextPassword =
-            findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
-        textInputEditTextConfirmPassword =
-            findViewById<View>(R.id.textInputEditTextConfirmPassword) as TextInputEditText
-        appCompatButtonRegister =
-            findViewById<View>(R.id.appCompatButtonRegister) as AppCompatButton
-        appCompatTextViewLoginLink =
-            findViewById<View>(R.id.appCompatTextViewLoginLink) as AppCompatTextView
+        textInputEditTextEmail = findViewById<View>(R.id.textInputEditTextEmail) as TextInputEditText
+        textInputEditTextPhone = findViewById<View>(R.id.textInputEditTextPhone) as TextInputEditText
+        textInputEditTextPassword = findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
+        textInputEditTextConfirmPassword = findViewById<View>(R.id.textInputEditTextConfirmPassword) as TextInputEditText
+        appCompatButtonRegister = findViewById<View>(R.id.appCompatButtonRegister) as AppCompatButton
+        appCompatTextViewLoginLink = findViewById<View>(R.id.appCompatTextViewLoginLink) as AppCompatTextView
     }
 
     /**
@@ -82,7 +79,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun initListeners() {
         appCompatButtonRegister!!.setOnClickListener(this)
         appCompatTextViewLoginLink!!.setOnClickListener(this)
-
     }
 
     /**
@@ -134,6 +130,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
+
+        if (!inputValidation!!.isInputEditTextFilled(
+                textInputEditTextPhone,
+                textInputLayoutPhone,
+                getString(R.string.error_message_name)
+            )
+        ) {
+            return
+        }
+
         if (!inputValidation!!.isInputEditTextFilled(
                 textInputEditTextPassword,
                 textInputLayoutPassword,
@@ -157,6 +163,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             var user = User(
                 name = textInputEditTextName!!.text.toString().trim(),
                 email = textInputEditTextEmail!!.text.toString().trim(),
+                phone = textInputEditTextPhone!!.text.toString().toInt(),
                 password = textInputEditTextPassword!!.text.toString().trim()
             )
 
@@ -184,6 +191,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun emptyInputEditText() {
         textInputEditTextName!!.text = null
         textInputEditTextEmail!!.text = null
+        textInputEditTextPhone!!.text = null
         textInputEditTextPassword!!.text = null
         textInputEditTextConfirmPassword!!.text = null
     }
