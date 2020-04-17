@@ -20,7 +20,7 @@
             android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/book_name"
+            android:id="@+id/book_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="5dp"
             android:text="Book author"
             app:layout_constraintBottom_toBottomOf="@+id/book_image"
-            app:layout_constraintLeft_toLeftOf="@id/book_name" />
+            app:layout_constraintLeft_toLeftOf="@id/book_title" />
 
         <ImageButton
             android:id="@+id/menu_button"
@@ -50,10 +50,9 @@
             android:id="@+id/book_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
             android:text="2001"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/menu_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

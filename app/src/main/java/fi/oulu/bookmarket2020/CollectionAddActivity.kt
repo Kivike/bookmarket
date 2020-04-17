@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
@@ -20,6 +21,8 @@ import fi.oulu.bookmarket2020.model.CollectionBook
 import org.jetbrains.anko.doAsync
 import java.io.File
 import java.io.IOException
+import fi.oulu.bookmarket2020.model.AppDatabase
+import org.jetbrains.anko.uiThread
 
 class CollectionAddActivity : AppCompatActivity(), SearchListener {
 
@@ -69,7 +72,6 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
                 "9780552163361" // For testing
                 else isbnInput.text.toString()
 
-
             try {
                 if (searchFragment.searchByIsbn(queryText)) {
                     isbnSearchButton.isEnabled = false
@@ -99,14 +101,18 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
                     isbn = isbn,
                     title = book.volumeInfo.title,
                     author = book.volumeInfo.authors.first(),
+                    publishYear = Integer.valueOf(book.volumeInfo.publishedDate),
                     isRead = markReadCb.isChecked,
-                    picturePath = currentPicPath
+                    picturePath = currentPicPath,
+                    saleBookId = null
                 )
 
                 doAsync {
-                    ///TODO insert into db
+                    val db = AppDatabase.get(applicationContext)
+                    val uid = db.collectionBookDao().insert(collectionBook).toInt()
+                    collectionBook.uid = uid
 
-                    runOnUiThread {
+                    uiThread {
                         Toast.makeText(
                             this@CollectionAddActivity,
                             "Added book to collection",
@@ -115,10 +121,20 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
                     }
                     if (sellCb.isChecked) {
                         startSellBookActivity(collectionBook)
+                    } else {
+                        finish()
                     }
                 }
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun startSellBookActivity(book: CollectionBook) {
