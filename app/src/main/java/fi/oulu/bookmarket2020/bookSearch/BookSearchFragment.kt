@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.api.services.books.model.Volume
-import kotlin.Exception
 
 class BookSearchFragment : Fragment(), SearchListener {
 
@@ -62,12 +61,8 @@ class BookSearchFragment : Fragment(), SearchListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-    }
-    // TODO: refactor this onAttach as it overrides nothing
-    /** override fun onAttach(context: Context?) {
-        super.onAttach(Context)
         searchListener = context as SearchListener
-    } **/
+    }
 
     override fun onResult(book: Volume?) {
         isSearching = false
