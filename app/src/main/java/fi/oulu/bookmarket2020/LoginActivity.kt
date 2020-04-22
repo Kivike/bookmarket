@@ -10,6 +10,7 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import fi.oulu.bookmarket2020.model.AppDatabase
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -23,7 +24,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var appCompatButtonLogin: AppCompatButton
     private lateinit var textViewLinkRegister: AppCompatTextView
     private lateinit var inputValidation: InputValidation
-    private lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,15 +55,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to initialize listeners
      */
     private fun initListeners() {
-        appCompatButtonLogin!!.setOnClickListener(this)
-        textViewLinkRegister!!.setOnClickListener(this)
+        appCompatButtonLogin.setOnClickListener(this)
+        textViewLinkRegister.setOnClickListener(this)
     }
 
     /**
      * This method is to initialize objects to be used
      */
     private fun initObjects() {
-        databaseHelper = DatabaseHelper(activity)
         inputValidation = InputValidation(activity)
     }
 
@@ -87,45 +86,46 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to validate the input text fields and verify login credentials from SQLite
      */
     private fun verifyFromSQLite() {
-        if (!inputValidation!!.isInputEditTextFilled(
-                textInputEditTextEmail!!,
-                textInputLayoutEmail!!,
+        if (!inputValidation.isInputEditTextFilled(
+                textInputEditTextEmail,
+                textInputLayoutEmail,
                 getString(R.string.error_message_email)
             )
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextEmail(
-                textInputEditTextEmail!!,
-                textInputLayoutEmail!!,
+        if (!inputValidation.isInputEditTextEmail(
+                textInputEditTextEmail,
+                textInputLayoutEmail,
                 getString(R.string.error_message_email)
             )
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextFilled(
-                textInputEditTextPassword!!,
-                textInputLayoutPassword!!,
+        if (!inputValidation.isInputEditTextFilled(
+                textInputEditTextPassword,
+                textInputLayoutPassword,
                 getString(R.string.error_message_email)
             )
         ) {
             return
         }
 
-        if (databaseHelper.checkUser(
-                textInputEditTextEmail.text.toString().trim { it <= ' ' },
-                textInputEditTextPassword.text.toString().trim { it <= ' ' })
-        ) {
+        val user = AppDatabase.get(applicationContext).userDao().getUser(
+            textInputEditTextEmail.text.toString().trim { it <= ' ' }
+        )
+
+        if (user != null) {
             val accountsIntent = Intent(activity, DashboardActivity::class.java)
             accountsIntent.putExtra(
                 "EMAIL",
-                textInputEditTextEmail!!.text.toString().trim { it <= ' ' })
+                textInputEditTextEmail.text.toString().trim { it <= ' ' })
             emptyInputEditText()
             startActivity(accountsIntent)
         } else {
             // Snack Bar to show success message that record is wrong
             Snackbar.make(
-                nestedScrollView!!,
+                nestedScrollView,
                 getString(R.string.error_valid_email_password),
                 Snackbar.LENGTH_LONG
             ).show()
@@ -136,7 +136,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to empty all input edit text
      */
     private fun emptyInputEditText() {
-        textInputEditTextEmail!!.text = null
-        textInputEditTextPassword!!.text = null
+        textInputEditTextEmail.text = null
+        textInputEditTextPassword.text = null
     }
 }
