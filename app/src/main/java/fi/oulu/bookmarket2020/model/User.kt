@@ -1,7 +1,6 @@
 package fi.oulu.bookmarket2020.model
 
 import androidx.room.*
-import org.intellij.lang.annotations.JdkConstants
 
 @Entity(tableName = "user")
 data class User(
