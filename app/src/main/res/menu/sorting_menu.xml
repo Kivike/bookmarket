@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/filter_group"
+        android:checkableBehavior="single"
+        >
+
+        <item android:id="@+id/sorting_author_asc"
+            android:title="Author A-Z"
+            android:checked="true"
+            />
+
+        <item
+            android:id="@+id/sorting_author_desc"
+            android:title="Author Z-A" />
+
+        <item
+            android:id="@+id/sorting_title_asc"
+            android:title="Title A-Z"
+            />
+
+        <item
+            android:id="@+id/sorting_title_desc"
+            android:title="Title Z-A" />
+
+        <item
+            android:id="@+id/sorting_published_asc"
+            android:title="Published Old-New" />
+
+        <item
+            android:id="@+id/sorting_published_desc"
+            android:title="Published New-Old" />
+    </group>
+</menu>

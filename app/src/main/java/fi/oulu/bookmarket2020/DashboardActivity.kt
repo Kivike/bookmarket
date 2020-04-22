@@ -6,10 +6,11 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.room.Room
 import com.google.android.material.navigation.NavigationView
 import fi.oulu.bookmarket2020.model.AppDatabase
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -24,6 +25,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
 
+    var appliedFilter: Int? = null
+    var appliedSorting: Int? = null
+
+    lateinit var filterPopupMenu: PopupMenu
+    lateinit var sortingPopupMenu: PopupMenu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -34,6 +41,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         initToolbar()
         initAddBookButton()
+        initFilters()
+        initSorting()
     }
 
     override fun onResume() {
@@ -44,7 +53,23 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun refreshCollection() {
         doAsync {
             val db = AppDatabase.get(applicationContext)
-            val collectionBooks = db.collectionBookDao().getCollectionBooks().toMutableList()
+
+            val collectionBooks = when(appliedFilter) {
+                R.id.filter_read -> db.collectionBookDao().getCollectionBookReadOnly()
+                R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly()
+                else -> db.collectionBookDao().getCollectionBooks()
+            }.toMutableList()
+
+            collectionBooks.sortBy{ it.publishYear }
+
+            when(appliedSorting) {
+                R.id.sorting_author_asc -> collectionBooks.sortBy { it.author }
+                R.id.sorting_author_desc -> collectionBooks.sortByDescending { it.author }
+                R.id.sorting_title_asc -> collectionBooks.sortBy { it.title }
+                R.id.sorting_title_desc -> collectionBooks.sortByDescending { it.title }
+                R.id.sorting_published_asc -> collectionBooks.sortBy { it.publishYear }
+                R.id.sorting_published_desc -> collectionBooks.sortByDescending { it.publishYear }
+            }
 
             uiThread {
                 val adapter = CollectionAdapter(
@@ -55,6 +80,68 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 content.collection_list.adapter = adapter
             }
         }
+    }
+
+    /**
+     * Initialize collection filter selection
+     */
+    private fun initFilters() {
+        filterPopupMenu = PopupMenu(this, collection_filters)
+        filterPopupMenu.menuInflater.inflate(R.menu.filter_menu, filterPopupMenu.menu)
+
+        filterPopupMenu.menu.forEach { it ->
+            if (it.isChecked) {
+                appliedFilter = it.itemId
+                return@forEach
+            }
+        }
+        filterPopupMenu.setOnMenuItemClickListener { item: MenuItem? ->
+            setCollectionFilter(item!!)
+            true
+        }
+        collection_filters.setOnClickListener {
+            filterPopupMenu.show()
+        }
+    }
+
+    /**
+     * Initialize collection sorting selection
+     */
+    private fun initSorting() {
+        sortingPopupMenu = PopupMenu(this, collection_filters)
+        sortingPopupMenu.menuInflater.inflate(R.menu.sorting_menu, sortingPopupMenu.menu)
+
+        sortingPopupMenu.menu.forEach { it ->
+            if (it.isChecked) {
+                appliedSorting = it.itemId
+                return@forEach
+            }
+        }
+        sortingPopupMenu.setOnMenuItemClickListener { item: MenuItem? ->
+            setCollectionSorting(item!!)
+            true
+        }
+        collection_sorting.setOnClickListener{
+            sortingPopupMenu.show()
+        }
+    }
+
+    /**
+     * Set filter option to be used
+     */
+    private fun setCollectionFilter(item: MenuItem) {
+        item.isChecked = true
+        appliedFilter = item.itemId
+        refreshCollection()
+    }
+
+    /**
+     * Set sorting option
+     */
+    private fun setCollectionSorting(item: MenuItem) {
+        item.isChecked = true
+        appliedSorting = item.itemId
+        refreshCollection()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

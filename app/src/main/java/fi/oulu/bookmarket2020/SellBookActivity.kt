@@ -48,7 +48,7 @@ class SellBookActivity : AppCompatActivity() {
 
             findViewById<TextView>(R.id.book_title).text = collectionBook.title
             findViewById<TextView>(R.id.book_author).text = collectionBook.author
-            findViewById<TextView>(R.id.book_year).text = collectionBook.publishYear.toString()
+            findViewById<TextView>(R.id.book_published).text = collectionBook.publishYear.toString()
         }
     }
 

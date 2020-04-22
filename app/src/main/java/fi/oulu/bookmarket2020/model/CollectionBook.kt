@@ -2,7 +2,9 @@ package fi.oulu.bookmarket2020.model
 
 import androidx.room.*
 
-@Entity(tableName = "collection_book")
+@Entity(
+    tableName = "collection_book"
+)
 data class CollectionBook(
     @PrimaryKey(autoGenerate = true) var uid: Int?,
     @ColumnInfo(name = "isbn") var isbn: String,
@@ -21,6 +23,12 @@ interface CollectionBookDao {
 
     @Query("SELECT * FROM collection_book")
     fun getCollectionBooks(): List<CollectionBook>
+
+    @Query("SELECT * FROM collection_book WHERE sale_book_id IS NOT NULL")
+    fun getCollectionBookSoldOnly(): List<CollectionBook>
+
+    @Query("SELECT * FROM collection_book WHERE is_read = 1")
+    fun getCollectionBookReadOnly(): List<CollectionBook>
 
     @Query("SELECT * FROM collection_book WHERE uid = :bookId")
     fun getCollectionBook(bookId: Int): CollectionBook

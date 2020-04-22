@@ -101,7 +101,7 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
                     isbn = isbn,
                     title = book.volumeInfo.title,
                     author = book.volumeInfo.authors.first(),
-                    publishYear = Integer.valueOf(book.volumeInfo.publishedDate),
+                    publishYear = Integer.valueOf(book.volumeInfo.publishedDate.split('-')[0]),
                     isRead = markReadCb.isChecked,
                     picturePath = currentPicPath,
                     saleBookId = null
@@ -109,6 +109,7 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
 
                 doAsync {
                     val db = AppDatabase.get(applicationContext)
+
                     val uid = db.collectionBookDao().insert(collectionBook).toInt()
                     collectionBook.uid = uid
 
