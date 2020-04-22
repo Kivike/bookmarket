@@ -2,6 +2,7 @@ package fi.oulu.bookmarket2020
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -11,11 +12,13 @@ import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import fi.oulu.bookmarket2020.model.CollectionBook
 import kotlinx.android.synthetic.main.collection_list_item.view.*
+import fi.oulu.bookmarket2020.model.AppDatabase
+import org.jetbrains.anko.doAsync
 
 class CollectionAdapter(
     private val applicationContext: Context,
     private val activityContext: Context,
-    private val list: List<CollectionBook>
+    private val list: MutableList<CollectionBook>
 ) : BaseAdapter() {
 
     private val inflater: LayoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -25,18 +28,22 @@ class CollectionAdapter(
 
         val book = getItem(position) as CollectionBook
 
-        row.book_name.text = book.title
+        row.book_title.text = book.title
         row.book_author.text = book.author
 
-        if (position % 4 != 0) {
+        if (book.saleBookId == null) {
             row.sale_status.visibility = View.GONE
         }
 
-        initMenu(row, book)
+        if (book.picturePath != null) {
+            val pictureBitmap = BitmapFactory.decodeFile(book.picturePath)
+            row.book_image.setImageBitmap(pictureBitmap)
+        }
+
+        initMenu(position, row, book)
 
         return row
     }
-
 
     override fun getItem(position: Int): Any {
         return list[position]
@@ -50,7 +57,7 @@ class CollectionAdapter(
         return list.size
     }
 
-    private fun initMenu(row: View, book: CollectionBook) {
+    private fun initMenu(position: Int, row: View, book: CollectionBook) {
         row.menu_button.setOnClickListener { button: View ->
             val popup = PopupMenu(activityContext, button)
             popup.menuInflater.inflate(R.menu.collection_item_menu, popup.menu)
@@ -63,6 +70,8 @@ class CollectionAdapter(
                     }
                     R.id.delete -> {
                         deleteCollectionBook(book)
+                        list.removeAt(position)
+                        notifyDataSetChanged()
                     }
                 }
                 true
@@ -78,6 +87,10 @@ class CollectionAdapter(
     }
 
     private fun deleteCollectionBook(book: CollectionBook) {
+        doAsync {
+            val db = AppDatabase.get(applicationContext)
+            db.collectionBookDao().delete(book.uid!!)
+        }
         Toast.makeText(activityContext, "Deleted book " + book.title, Toast.LENGTH_SHORT).show()
     }
 }

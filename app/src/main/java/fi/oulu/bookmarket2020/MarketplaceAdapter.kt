@@ -14,7 +14,7 @@ class MarketplaceAdapter(context: Context, private val list: List<String>) : Bas
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val row = inflater.inflate(R.layout.collection_list_item, parent, false)
 
-        row.book_name.text = list[position]
+        row.book_title.text = list[position]
         row.book_author.text ="Firstname Lastname"
         row.sale_status.text = ""
 
