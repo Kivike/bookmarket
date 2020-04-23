@@ -10,8 +10,9 @@
     <string name="isbn_number">ISBN number</string>
     <string name="book_title">Book title</string>
     <string name="author">Author</string>
-    <string name="year_of_release">Year</string>
-    <string name="take_picture">Take a picture</string>
+    <string name="year_of_release">Published</string>
+    <string name="take_picture">Take a photo of your book</string>
+    <string name="sell_book">Put up for sale</string>
     <string name="sell">Sell</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
@@ -21,6 +22,12 @@
     <string name="comments">Comments</string>
 
     <string name="collection">Collection</string>
+    <plurals name="number_of_books">
+        <item quantity="zero">%d books</item>
+        <item quantity="one">%d book</item>
+        <item quantity="other">%d books</item>
+    </plurals>
+
     <string name="marketplace">Marketplace</string>
     <string name="profile">Profile</string>
     <string name="book_comment">Book is in very good condition. This is one of the most interesting Book. I am sure you would love it </string>

@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_collection.*
 import kotlinx.android.synthetic.main.content_collection.view.*
 
 class MarketplaceActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorPrimary">
+    android:background="@color/colorBackground">
 
     <TextView
-        android:id="@+id/search_label"
+        android:id="@+id/collection_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:text="46 books in collection"
         android:textColor="#FFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/search_collection"
+        app:layout_constraintBottom_toTopOf="@+id/collection_list"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="collection_sorting,collection_filters"></androidx.constraintlayout.widget.Group>
 
     <Button
         android:id="@+id/collection_sorting"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/sorting" />
+        android:text="@string/sorting"
+        app:layout_constraintEnd_toStartOf="@+id/collection_filters"
+        app:layout_constraintTop_toTopOf="@+id/collection_filters"
+        android:background="@color/colorBackgroundLight"
+        android:layout_marginRight="5dp"
+        />
 
     <Button
         android:id="@+id/collection_filters"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collection_sorting"
-        app:layout_constraintRight_toRightOf="@id/collection_sorting"
-        android:text="@string/filters" />
+        android:text="@string/filters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorBackgroundLight"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/search_collection"
         android:layout_width="0dp"
         android:layout_height="40dp"
@@ -49,21 +57,21 @@
         android:paddingLeft="15dp"
         android:hint="Search collection"
         android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="2dp" />
+        android:drawablePadding="2dp" />-->
 
     <ListView
         android:id="@+id/collection_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:paddingTop="5dp"
+        android:background="@color/colorBackgroundLight"
         android:clipToPadding="false"
         android:dividerHeight="1sp"
+        android:paddingTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_collection"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:background="?android:attr/colorBackground" >
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collection_filters">
 
     </ListView>
 
@@ -71,8 +79,12 @@
         android:id="@+id/fab_add_book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorTextHint"
         android:clickable="true"
+        android:tint="@color/colorText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         app:srcCompat="@android:drawable/ic_menu_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

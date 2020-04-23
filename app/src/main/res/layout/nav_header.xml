@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:background="#4CAF50"
+    android:layout_height="150dp"
+    android:background="@color/colorFlavor"
     android:gravity="bottom"
     android:paddingLeft="15dp"
     android:paddingBottom="15dp">
 
-    >
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
+        android:src="@drawable/ic_logo"
         android:id="@+id/imageView"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
+    android:background="@color/colorBackground"
     >
 
     <LinearLayout
@@ -14,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_search" android:id="@+id/toolbar" />
+        <include layout="@layout/toolbar" android:id="@+id/toolbar" />
 
         <include layout="@layout/content_collection" android:id="@+id/content" />
     </LinearLayout>
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#FFFFFF"
+        android:background="@color/colorBackground"
         android:divider="@android:color/darker_gray"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"

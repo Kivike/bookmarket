@@ -9,7 +9,8 @@
             android:title="Show all" />
 
         <item android:id="@+id/filter_sell"
-            android:title="Books on sale only" />
+            android:title="Books on sale only"
+            />
 
         <item android:id="@+id/filter_read"
             android:title="Read books only" />
