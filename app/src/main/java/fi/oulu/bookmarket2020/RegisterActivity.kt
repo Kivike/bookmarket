@@ -179,6 +179,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 ).show()
 
                 val intent = Intent(applicationContext, LoginActivity::class.java)
+                intent.putExtra("email", email)
                 startActivity(intent)
             } else {
                 // Snack Bar to show error message that record already exists
