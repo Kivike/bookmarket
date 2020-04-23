@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/filter_group"
+        android:checkableBehavior="single">
+
+
+        <item android:id="@+id/filter_none"
+            android:checked="true"
+            android:title="Show all" />
+
+        <item android:id="@+id/filter_sell"
+            android:title="Books on sale only" />
+
+        <item android:id="@+id/filter_read"
+            android:title="Read books only" />
+    </group>
+</menu>

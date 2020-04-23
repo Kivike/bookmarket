@@ -13,6 +13,8 @@ import androidx.appcompat.widget.PopupMenu
 import fi.oulu.bookmarket2020.model.CollectionBook
 import kotlinx.android.synthetic.main.collection_list_item.view.*
 import fi.oulu.bookmarket2020.model.AppDatabase
+import kotlinx.android.synthetic.main.collection_list_item.view.book_author
+import kotlinx.android.synthetic.main.collection_list_item.view.book_title
 import org.jetbrains.anko.doAsync
 
 class CollectionAdapter(
@@ -30,6 +32,7 @@ class CollectionAdapter(
 
         row.book_title.text = book.title
         row.book_author.text = book.author
+        row.book_published.text = book.publishYear.toString()
 
         if (book.saleBookId == null) {
             row.sale_status.visibility = View.GONE
@@ -41,7 +44,6 @@ class CollectionAdapter(
         }
 
         initMenu(position, row, book)
-
         return row
     }
 

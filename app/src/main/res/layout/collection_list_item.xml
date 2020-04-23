@@ -47,7 +47,7 @@
             style="?android:attr/actionOverflowButtonStyle"/>
 
         <TextView
-            android:id="@+id/book_year"
+            android:id="@+id/book_published"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2001"
@@ -62,7 +62,7 @@
             android:layout_marginBottom="5dp"
             android:text="ON SALE"
             android:textColor="?android:attr/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/book_year"
+            app:layout_constraintEnd_toEndOf="@+id/book_published"
             app:layout_constraintBottom_toBottomOf="@id/book_image"
             />
 

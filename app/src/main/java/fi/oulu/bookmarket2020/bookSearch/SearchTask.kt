@@ -13,9 +13,7 @@ class SearchTask: AsyncTask<String, Void, Volume>() {
     lateinit var listener: SearchListener
 
     override fun doInBackground(vararg params: String?): Volume? {
-        //val isbn = params[0]
-        val isbn = "9780552163361"
-        //val isbn = "978-0-575-08892-4".replace("-", "")
+        val isbn = params[0]
         val query = "isbn:$isbn"
 
         val books = Books.Builder(
