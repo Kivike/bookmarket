@@ -1,5 +1,6 @@
 package fi.oulu.bookmarket2020
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,9 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import fi.oulu.bookmarket2020.model.AppDatabase
 import fi.oulu.bookmarket2020.model.User
+import org.jetbrains.anko.doAsync
 
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
@@ -30,7 +33,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var appCompatButtonRegister: AppCompatButton
     private lateinit var appCompatTextViewLoginLink: AppCompatTextView
     private lateinit var inputValidation: InputValidation
-    private lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun configureToolbar() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle("Register")
+        supportActionBar?.title = "Register"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
@@ -77,8 +79,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to initialize listeners
      */
     private fun initListeners() {
-        appCompatButtonRegister!!.setOnClickListener(this)
-        appCompatTextViewLoginLink!!.setOnClickListener(this)
+        appCompatButtonRegister.setOnClickListener(this)
+        appCompatTextViewLoginLink.setOnClickListener(this)
     }
 
     /**
@@ -86,7 +88,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun initObjects() {
         inputValidation = InputValidation(activity)
-        databaseHelper = DatabaseHelper(activity)
     }
 
 
@@ -106,7 +107,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to validate the input text fields and post data to SQLite
      */
     private fun postDataToSQLite() {
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!inputValidation.isInputEditTextFilled(
                 textInputEditTextName,
                 textInputLayoutName,
                 getString(R.string.error_message_name)
@@ -114,7 +115,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!inputValidation.isInputEditTextFilled(
                 textInputEditTextEmail,
                 textInputLayoutEmail,
                 getString(R.string.error_message_email)
@@ -122,7 +123,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextEmail(
+        if (!inputValidation.isInputEditTextEmail(
                 textInputEditTextEmail,
                 textInputLayoutEmail,
                 getString(R.string.error_message_email)
@@ -131,7 +132,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!inputValidation.isInputEditTextFilled(
                 textInputEditTextPhone,
                 textInputLayoutPhone,
                 getString(R.string.error_message_name)
@@ -140,7 +141,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!inputValidation.isInputEditTextFilled(
                 textInputEditTextPassword,
                 textInputLayoutPassword,
                 getString(R.string.error_message_password)
@@ -148,51 +149,57 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextMatches(
+        if (!inputValidation.isInputEditTextMatches(
                 textInputEditTextPassword, textInputEditTextConfirmPassword,
                 textInputLayoutConfirmPassword, getString(R.string.error_password_match)
             )
         ) {
             return
         }
+        doAsync {
+            val userDao = AppDatabase.get(applicationContext).userDao()
 
-        if (!databaseHelper!!.checkUser(
-                textInputEditTextEmail!!.text.toString().trim(),
-                textInputEditTextPassword.text.toString().trim { it <= ' ' })) {
+            val email = textInputEditTextEmail.text.toString().trim()
+            val existingUser = userDao.getUser(email)
 
-            var user = User(
-                name = textInputEditTextName!!.text.toString().trim(),
-                email = textInputEditTextEmail!!.text.toString().trim(),
-                phone = textInputEditTextPhone!!.text.toString().toInt(),
-                password = textInputEditTextPassword!!.text.toString().trim()
-            )
+            if (existingUser == null) {
+                val user = User(
+                    name = textInputEditTextName.text.toString().trim(),
+                    email = email,
+                    phone = textInputEditTextPhone.text.toString().toInt(),
+                    password = textInputEditTextPassword.text.toString().trim()
+                )
+                userDao.addUser(user)
 
-            databaseHelper!!.addUser(user)
-            // Snack Bar to show success message that record saved successfully
-            Snackbar.make(
-                nestedScrollView!!,
-                getString(R.string.success_message),
-                Snackbar.LENGTH_LONG
-            ).show()
-            emptyInputEditText()
-        } else {
-            // Snack Bar to show error message that record already exists
-            Snackbar.make(
-                nestedScrollView!!,
-                getString(R.string.error_email_exists),
-                Snackbar.LENGTH_LONG
-            ).show()
+                // Snack Bar to show success message that record saved successfully
+                Snackbar.make(
+                    nestedScrollView,
+                    getString(R.string.success_message),
+                    Snackbar.LENGTH_LONG
+                ).show()
+
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+            } else {
+                // Snack Bar to show error message that record already exists
+                Snackbar.make(
+                    nestedScrollView,
+                    getString(R.string.error_email_exists),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
         }
+
     }
 
     /**
      * This method is to empty all input edit text
      */
     private fun emptyInputEditText() {
-        textInputEditTextName!!.text = null
-        textInputEditTextEmail!!.text = null
-        textInputEditTextPhone!!.text = null
-        textInputEditTextPassword!!.text = null
-        textInputEditTextConfirmPassword!!.text = null
+        textInputEditTextName.text = null
+        textInputEditTextEmail.text = null
+        textInputEditTextPhone.text = null
+        textInputEditTextPassword.text = null
+        textInputEditTextConfirmPassword.text = null
     }
 }
