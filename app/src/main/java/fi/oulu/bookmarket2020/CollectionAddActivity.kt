@@ -139,7 +139,6 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
     }
 
     private fun startSellBookActivity(book: CollectionBook) {
-
         val intent = Intent(applicationContext, SellBookActivity::class.java)
         intent.putExtra("bookId", book.uid)
         startActivity(intent)

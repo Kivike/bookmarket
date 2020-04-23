@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBackground">#413e4f</color>
-    <color name="colorText">#FFFFFF</color>
+    <color name="colorBackgroundLight">#565368</color>
+    <color name="colorText">#F6F6F6</color>
     <color name="colorTextHint">#51d8c7</color>
+    <color name="colorAddButton">#45A33B</color>
+    <color name="colorFlavor">#854F2B</color>
+    <color name="colorLabel">#D8D2D2</color>
 </resources>

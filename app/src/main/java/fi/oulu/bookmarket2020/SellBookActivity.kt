@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.room.Room
 import fi.oulu.bookmarket2020.model.AppDatabase
 import fi.oulu.bookmarket2020.model.CollectionBook
 import fi.oulu.bookmarket2020.model.SaleBook
@@ -75,7 +74,7 @@ class SellBookActivity : AppCompatActivity() {
                 val db = AppDatabase.get(applicationContext)
                 db.saleBookDao().insert(saleBook)
 
-                val intent = Intent(applicationContext, DashboardActivity::class.java)
+                val intent = Intent(applicationContext, CollectionActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
             }

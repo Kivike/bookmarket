@@ -4,8 +4,8 @@
     android:id="@+id/app_toolbar"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="?android:attr/colorPrimaryDark"
+    android:background="@color/colorBackgroundLight"
     android:orientation="vertical"
-    app:titleTextColor="@color/colorPrimary">
+    app:titleTextColor="@color/colorText">
 
 </androidx.appcompat.widget.Toolbar>

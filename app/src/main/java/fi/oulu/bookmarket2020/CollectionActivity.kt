@@ -10,17 +10,16 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.children
-import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import fi.oulu.bookmarket2020.model.AppDatabase
-import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_collection.*
 import kotlinx.android.synthetic.main.content_collection.*
 import kotlinx.android.synthetic.main.content_collection.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -34,7 +33,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        setContentView(R.layout.activity_collection)
 
         drawerLayout = findViewById(R.id.drawer_layout)
         toolbar = findViewById(R.id.toolbar)
@@ -75,10 +74,15 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             uiThread {
                 val adapter = CollectionAdapter(
                     applicationContext,
-                    this@DashboardActivity,
+                    this@CollectionActivity,
                     collectionBooks
                 )
                 content.collection_list.adapter = adapter
+                collection_label.text = resources.getQuantityString(
+                    R.plurals.number_of_books,
+                    collectionBooks.size,
+                    collectionBooks.size
+                )
             }
         }
     }
@@ -155,6 +159,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun initToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setTitle(R.string.collection)
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
 

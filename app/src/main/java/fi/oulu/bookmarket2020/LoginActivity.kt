@@ -118,7 +118,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             )
 
             if (user != null) {
-                val accountsIntent = Intent(activity, DashboardActivity::class.java)
+                val accountsIntent = Intent(activity, CollectionActivity::class.java)
                 accountsIntent.putExtra(
                     "EMAIL",
                     textInputEditTextEmail.text.toString().trim { it <= ' ' })
