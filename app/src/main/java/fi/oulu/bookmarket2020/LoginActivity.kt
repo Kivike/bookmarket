@@ -122,7 +122,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 accountsIntent.putExtra(
                     "EMAIL",
                     textInputEditTextEmail.text.toString().trim { it <= ' ' })
-                emptyInputEditText()
                 startActivity(accountsIntent)
             } else {
                 // Snack Bar to show success message that record is wrong

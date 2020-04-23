@@ -1,5 +1,6 @@
 package fi.oulu.bookmarket2020
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -176,7 +177,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     getString(R.string.success_message),
                     Snackbar.LENGTH_LONG
                 ).show()
-                emptyInputEditText()
+
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
             } else {
                 // Snack Bar to show error message that record already exists
                 Snackbar.make(
