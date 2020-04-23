@@ -168,8 +168,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     phone = textInputEditTextPhone.text.toString().toInt(),
                     password = textInputEditTextPassword.text.toString().trim()
                 )
-
                 userDao.addUser(user)
+
                 // Snack Bar to show success message that record saved successfully
                 Snackbar.make(
                     nestedScrollView,

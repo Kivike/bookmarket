@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import fi.oulu.bookmarket2020.model.AppDatabase
+import org.jetbrains.anko.doAsync
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -111,24 +112,26 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        val user = AppDatabase.get(applicationContext).userDao().getUser(
-            textInputEditTextEmail.text.toString().trim { it <= ' ' }
-        )
+        doAsync {
+            val user = AppDatabase.get(applicationContext).userDao().getUser(
+                textInputEditTextEmail.text.toString().trim { it <= ' ' }
+            )
 
-        if (user != null) {
-            val accountsIntent = Intent(activity, DashboardActivity::class.java)
-            accountsIntent.putExtra(
-                "EMAIL",
-                textInputEditTextEmail.text.toString().trim { it <= ' ' })
-            emptyInputEditText()
-            startActivity(accountsIntent)
-        } else {
-            // Snack Bar to show success message that record is wrong
-            Snackbar.make(
-                nestedScrollView,
-                getString(R.string.error_valid_email_password),
-                Snackbar.LENGTH_LONG
-            ).show()
+            if (user != null) {
+                val accountsIntent = Intent(activity, DashboardActivity::class.java)
+                accountsIntent.putExtra(
+                    "EMAIL",
+                    textInputEditTextEmail.text.toString().trim { it <= ' ' })
+                emptyInputEditText()
+                startActivity(accountsIntent)
+            } else {
+                // Snack Bar to show success message that record is wrong
+                Snackbar.make(
+                    nestedScrollView,
+                    getString(R.string.error_valid_email_password),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
