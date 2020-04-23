@@ -11,7 +11,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import fi.oulu.bookmarket2020.model.AppDatabase
+import fi.oulu.bookmarket2020.model.User
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -136,6 +138,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     getString(R.string.error_valid_email_password),
                     Snackbar.LENGTH_LONG
                 ).show()
+            }
+
+            // Creat a sample testUser
+            val userDao = AppDatabase.get(applicationContext).userDao()
+            val email = "manish@mail.com"
+            //val email = textInputEditTextEmail.text.toString().trim()
+            val existingUser = userDao.getUser(email)
+
+            if (existingUser == null) {
+                val user = User(
+                    name = "manish",
+                    email = email,
+                    phone = "0000000000".toInt(),
+                    password = "123"
+                )
+                val createTestUser =  userDao.addUser(user)
+                uiThread {
+                    createTestUser
+                }
             }
         }
     }
