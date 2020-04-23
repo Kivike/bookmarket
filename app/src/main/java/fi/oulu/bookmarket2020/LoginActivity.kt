@@ -37,6 +37,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         initListeners()
         // initializing the objects
         initObjects()
+
+        val email = intent.getStringExtra("email")
+
+        if (email != null) {
+            textInputEditTextEmail.setText(email)
+        }
     }
 
     /**
