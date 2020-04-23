@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -89,10 +90,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         filterPopupMenu = PopupMenu(this, collection_filters)
         filterPopupMenu.menuInflater.inflate(R.menu.filter_menu, filterPopupMenu.menu)
 
-        filterPopupMenu.menu.forEach { it ->
-            if (it.isChecked) {
-                appliedFilter = it.itemId
-                return@forEach
+        for (menuItem in filterPopupMenu.menu.children) {
+            if (menuItem.isChecked) {
+                appliedFilter = menuItem.itemId
+                break
             }
         }
         filterPopupMenu.setOnMenuItemClickListener { item: MenuItem? ->
@@ -111,10 +112,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         sortingPopupMenu = PopupMenu(this, collection_filters)
         sortingPopupMenu.menuInflater.inflate(R.menu.sorting_menu, sortingPopupMenu.menu)
 
-        sortingPopupMenu.menu.forEach { it ->
-            if (it.isChecked) {
-                appliedSorting = it.itemId
-                return@forEach
+        for (menuItem in sortingPopupMenu.menu.children) {
+            if (menuItem.isChecked) {
+                appliedSorting = menuItem.itemId
+                break
             }
         }
         sortingPopupMenu.setOnMenuItemClickListener { item: MenuItem? ->
