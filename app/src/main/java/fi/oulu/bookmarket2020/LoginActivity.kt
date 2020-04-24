@@ -53,9 +53,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun initViews() {
         nestedScrollView = findViewById<View>(R.id.nestedScrollView) as NestedScrollView
         textInputLayoutEmail = findViewById<View>(R.id.textInputLayoutEmail) as TextInputLayout
-        textInputLayoutPassword = findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout
-        textInputEditTextEmail = findViewById<View>(R.id.textInputEditTextEmail) as TextInputEditText
-        textInputEditTextPassword = findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
+        textInputLayoutPassword =
+            findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout
+        textInputEditTextEmail =
+            findViewById<View>(R.id.textInputEditTextEmail) as TextInputEditText
+        textInputEditTextPassword =
+            findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
         appCompatButtonLogin = findViewById<View>(R.id.appCompatButtonLogin) as AppCompatButton
         textViewLinkRegister = findViewById<View>(R.id.textViewLinkRegister) as AppCompatTextView
     }
@@ -142,21 +145,24 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
             // Creat a sample testUser
             val userDao = AppDatabase.get(applicationContext).userDao()
-            val email = "manish@mail.com"
-            //val email = textInputEditTextEmail.text.toString().trim()
+            val email = "test@mail.com"
+
+            // check if existing user with same email address exists
             val existingUser = userDao.getUser(email)
 
             if (existingUser == null) {
-                val user = User(
+                val userDetails = User(
                     name = "manish",
                     email = email,
                     phone = "0000000000".toInt(),
                     password = "123"
                 )
-                val createTestUser =  userDao.addUser(user)
+                val createTestUser = userDao.addUser(userDetails)
                 uiThread {
+                    @Suppress("UNUSED_EXPRESSION")
                     createTestUser
                 }
+
             }
         }
     }
