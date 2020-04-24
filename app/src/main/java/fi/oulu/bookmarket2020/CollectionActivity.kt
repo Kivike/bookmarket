@@ -1,11 +1,11 @@
 package fi.oulu.bookmarket2020
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -13,6 +13,7 @@ import androidx.core.view.children
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import fi.oulu.bookmarket2020.model.AppDatabase
+import fi.oulu.bookmarket2020.model.CollectionBook
 import kotlinx.android.synthetic.main.activity_collection.*
 import kotlinx.android.synthetic.main.content_collection.*
 import kotlinx.android.synthetic.main.content_collection.view.*
@@ -54,15 +55,15 @@ class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         doAsync {
             val db = AppDatabase.get(applicationContext)
 
-            val collectionBooks = when(appliedFilter) {
+            val collectionBooks = when (appliedFilter) {
                 R.id.filter_read -> db.collectionBookDao().getCollectionBookReadOnly()
                 R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly()
                 else -> db.collectionBookDao().getCollectionBooks()
             }.toMutableList()
 
-            collectionBooks.sortBy{ it.publishYear }
+            collectionBooks.sortBy { it.publishYear }
 
-            when(appliedSorting) {
+            when (appliedSorting) {
                 R.id.sorting_author_asc -> collectionBooks.sortBy { it.author }
                 R.id.sorting_author_desc -> collectionBooks.sortByDescending { it.author }
                 R.id.sorting_title_asc -> collectionBooks.sortBy { it.title }
@@ -84,7 +85,9 @@ class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                     collectionBooks.size
                 )
             }
+            addSampleData()
         }
+
     }
 
     /**
@@ -126,7 +129,7 @@ class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             setCollectionSorting(item!!)
             true
         }
-        collection_sorting.setOnClickListener{
+        collection_sorting.setOnClickListener {
             sortingPopupMenu.show()
         }
     }
@@ -169,9 +172,40 @@ class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     }
 
     private fun initAddBookButton() {
-        fab_add_book.setOnClickListener{
+        fab_add_book.setOnClickListener {
             val intent = Intent(applicationContext, CollectionAddActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun addSampleData() {
+        val isbn = "1880418622"
+        val saleBookId = 1
+        val publisherDate = 2004
+        val bookCollections = AppDatabase.get(applicationContext).collectionBookDao()
+
+        // check if the book has been already added or not
+        val getCollectionBooks = bookCollections.getCollectionBooks().size
+
+        doAsync {
+            if (getCollectionBooks < 1) {
+                val collectionBook = CollectionBook(
+                    uid = null,
+                    isbn = isbn,
+                    title = "The Dark Tower VII",
+                    author = "Stephen King",
+                    publishYear = publisherDate,
+                    isRead = true,
+                    picturePath = "drawable://" + R.drawable.darktower7,
+                    saleBookId = 1
+                )
+
+                val createEntry = bookCollections.insert(collectionBook)
+                uiThread {
+                    @Suppress("UNUSED_EXPRESSION")
+                    createEntry
+                }
+            }
         }
     }
 }
