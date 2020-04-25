@@ -213,7 +213,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cb_sell"
-        android:background="@color/colorAddButton"
+        android:background="@drawable/btn_default"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

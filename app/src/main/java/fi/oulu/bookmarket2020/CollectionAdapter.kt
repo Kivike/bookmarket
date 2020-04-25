@@ -84,7 +84,7 @@ class CollectionAdapter(
 
     private fun startSellBookActivity(book: CollectionBook) {
         val intent = Intent(applicationContext, SellBookActivity::class.java)
-        intent.putExtra("book_id", book.uid)
+        intent.putExtra("bookId", book.uid)
         activityContext.startActivity(intent)
     }
 

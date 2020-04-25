@@ -7,7 +7,9 @@
     <color name="colorBackgroundLight">#565368</color>
     <color name="colorText">#F6F6F6</color>
     <color name="colorTextHint">#51d8c7</color>
+    <color name="colorButton">#51d8c7</color>
     <color name="colorAddButton">#45A33B</color>
+    <color name="colorGreyButton">#bbb</color>
     <color name="colorFlavor">#854F2B</color>
     <color name="colorLabel">#D8D2D2</color>
 </resources>
