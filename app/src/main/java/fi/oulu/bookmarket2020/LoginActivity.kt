@@ -11,7 +11,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import fi.oulu.bookmarket2020.model.AppDatabase
+import fi.oulu.bookmarket2020.model.User
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -51,9 +53,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun initViews() {
         nestedScrollView = findViewById<View>(R.id.nestedScrollView) as NestedScrollView
         textInputLayoutEmail = findViewById<View>(R.id.textInputLayoutEmail) as TextInputLayout
-        textInputLayoutPassword = findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout
-        textInputEditTextEmail = findViewById<View>(R.id.textInputEditTextEmail) as TextInputEditText
-        textInputEditTextPassword = findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
+        textInputLayoutPassword =
+            findViewById<View>(R.id.textInputLayoutPassword) as TextInputLayout
+        textInputEditTextEmail =
+            findViewById<View>(R.id.textInputEditTextEmail) as TextInputEditText
+        textInputEditTextPassword =
+            findViewById<View>(R.id.textInputEditTextPassword) as TextInputEditText
         appCompatButtonLogin = findViewById<View>(R.id.appCompatButtonLogin) as AppCompatButton
         textViewLinkRegister = findViewById<View>(R.id.textViewLinkRegister) as AppCompatTextView
     }
@@ -136,6 +141,28 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     getString(R.string.error_valid_email_password),
                     Snackbar.LENGTH_LONG
                 ).show()
+            }
+
+            // Creat a sample testUser
+            val userDao = AppDatabase.get(applicationContext).userDao()
+            val email = "test@mail.com"
+
+            // check if existing user with same email address exists
+            val existingUser = userDao.getUser(email)
+
+            if (existingUser == null) {
+                val userDetails = User(
+                    name = "manish",
+                    email = email,
+                    phone = "0000000000".toInt(),
+                    password = "123"
+                )
+                val createTestUser = userDao.addUser(userDetails)
+                uiThread {
+                    @Suppress("UNUSED_EXPRESSION")
+                    createTestUser
+                }
+
             }
         }
     }
