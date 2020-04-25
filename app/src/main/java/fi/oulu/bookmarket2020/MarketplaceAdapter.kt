@@ -1,27 +1,44 @@
 package fi.oulu.bookmarket2020
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import fi.oulu.bookmarket2020.model.CollectionBook
 import kotlinx.android.synthetic.main.collection_list_item.view.*
 
-class MarketplaceAdapter(context: Context, private val list: List<String>) : BaseAdapter() {
+class MarketplaceAdapter(
+    private val applicationContext: Context,
+    private val activityContext: Context,
+    private val list: MutableList<CollectionBook>
+//    private val list: List<String>
+) : BaseAdapter() {
 
-    private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
+    private val inflater: LayoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val row = inflater.inflate(R.layout.collection_list_item, parent, false)
 
-        row.book_title.text = list[position]
-        row.book_author.text ="Firstname Lastname"
-        row.sale_status.text = ""
+        val book = getItem(position) as CollectionBook
+        row.book_title.text = book.title
+        row.book_author.text = book.author
+        row.book_published.text = book.publishYear.toString()
 
-        if (position % 4 != 0) {
-            row.sale_status.text = position.toString() + " €"
-            row.sale_status.textSize = 18.0f
+        if (book.saleBookId == null) {
+            row.sale_status.visibility = View.GONE
         }
+
+        if (book.picturePath != null) {
+            val pictureBitmap = BitmapFactory.decodeFile(book.picturePath)
+            row.book_image.setImageBitmap(pictureBitmap)
+        }
+
+        row.menu_button.setOnClickListener {
+            startBuyBookActivity(book)
+        }
+
         return row
     }
 
@@ -37,4 +54,28 @@ class MarketplaceAdapter(context: Context, private val list: List<String>) : Bas
         return list.size
     }
 
+
+//    private fun initMenu(position: Int, row: View, book: CollectionBook) {
+//        row.menu_button.setOnClickListener { button: View ->
+//            val popup = PopupMenu(activityContext, button)
+//            popup.menuInflater.inflate(R.menu.collection_item_menu, popup.menu)
+//
+//            popup.setOnMenuItemClickListener {
+//                    item: MenuItem? ->
+//                when (item!!.itemId) {
+//                    R.id.sell -> {
+//                        startBuyBookActivity(book)
+//                    }
+//                }
+//                true
+//            }
+//            popup.show()
+//        }
+//    }
+
+    private fun startBuyBookActivity(book: CollectionBook) {
+        val intent = Intent(applicationContext, BuyBookActivity::class.java)
+        intent.putExtra("book_id", book.uid)
+        activityContext.startActivity(intent)
+    }
 }
