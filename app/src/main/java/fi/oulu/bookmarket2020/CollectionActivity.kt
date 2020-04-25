@@ -4,11 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.core.view.children
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.content_collection.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class CollectionActivity : AppCompatActivity() {
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -149,13 +147,6 @@ class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         refreshCollection()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(this, "Clickity click", Toast.LENGTH_SHORT).show()
-
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
-    }
-
     private fun initToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -165,7 +156,14 @@ class CollectionActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        navView.setNavigationItemSelectedListener(this)
+
+        val navFragment = NavFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(navFragment, CollectionAddActivity.SEARCH_FRAGMENT_TAG)
+            .commit()
+
+        navView.setNavigationItemSelectedListener(navFragment)
     }
 
     private fun initAddBookButton() {
