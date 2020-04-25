@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
         <item
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_collection"
             android:title="@string/collection"/>
         <item
-            android:id="@+id/nav_messages"
+            android:id="@+id/nav_marketplace"
             android:title="@string/marketplace"/>
     </group>
 

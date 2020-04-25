@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_collection.*
 import kotlinx.android.synthetic.main.content_collection.view.*
 
-class MarketplaceActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MarketplaceActivity : AppCompatActivity() {
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -23,19 +23,11 @@ class MarketplaceActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_marketplace)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
         toolbar = findViewById(R.id.toolbar)
+        drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
 
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
-
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-        navView.setNavigationItemSelectedListener(this)
+        initToolbar()
     }
 
     override fun onResume() {
@@ -54,10 +46,21 @@ class MarketplaceActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         content.collection_list.adapter = adapter
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(this, "Clickity click", Toast.LENGTH_SHORT).show()
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        val navFragment = NavFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(navFragment, CollectionAddActivity.SEARCH_FRAGMENT_TAG)
+            .commit()
+
+        navView.setNavigationItemSelectedListener(navFragment)
     }
 }
