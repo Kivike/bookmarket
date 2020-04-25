@@ -35,7 +35,7 @@ class MarketplaceAdapter(
             row.book_image.setImageBitmap(pictureBitmap)
         }
 
-        row.menu_button.setOnClickListener {
+        row.collection_list_items.setOnClickListener {
             startBuyBookActivity(book)
         }
 
