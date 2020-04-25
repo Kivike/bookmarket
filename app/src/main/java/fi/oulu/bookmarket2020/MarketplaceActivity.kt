@@ -65,23 +65,8 @@ class MarketplaceActivity : AppCompatActivity() {
                     collectionBooks
                 )
                 content.collection_list.adapter = adapter
-//                collection_label.text = resources.getQuantityString(
-//                    R.plurals.number_of_books,
-//                    collectionBooks.size,
-//                    collectionBooks.size
-//                )
             }
         }
-        /*
-        val reminders: MutableList<String> = ArrayList()
-
-        for (i in 1..15) {
-            reminders.add("Book name${i}")
-        }
-
-        val adapter = MarketplaceAdapter(applicationContext, reminders)
-        content.collection_list.adapter = adapter
-        */
     }
 
     private fun initToolbar() {
