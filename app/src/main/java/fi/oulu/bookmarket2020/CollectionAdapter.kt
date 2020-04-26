@@ -84,14 +84,14 @@ class CollectionAdapter(
 
     private fun startSellBookActivity(book: CollectionBook) {
         val intent = Intent(applicationContext, SellBookActivity::class.java)
-        intent.putExtra("bookId", book.uid)
+        intent.putExtra("bookId", book.id)
         activityContext.startActivity(intent)
     }
 
     private fun deleteCollectionBook(book: CollectionBook) {
         doAsync {
             val db = AppDatabase.get(applicationContext)
-            db.collectionBookDao().delete(book.uid!!)
+            db.collectionBookDao().delete(book.id!!)
         }
         Toast.makeText(activityContext, "Deleted book " + book.title, Toast.LENGTH_SHORT).show()
     }

@@ -51,12 +51,14 @@ class CollectionActivity : AppCompatActivity() {
 
     private fun refreshCollection() {
         doAsync {
+            val userId = Session(applicationContext).getLoggedInUser()!!.id!!
+
             val db = AppDatabase.get(applicationContext)
 
             val collectionBooks = when (appliedFilter) {
-                R.id.filter_read -> db.collectionBookDao().getCollectionBookReadOnly()
-                R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly()
-                else -> db.collectionBookDao().getCollectionBooks()
+                R.id.filter_read -> db.collectionBookDao().getCollectionBookReadOnly(userId)
+                R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly(userId)
+                else -> db.collectionBookDao().getCollectionBooks(userId)
             }.toMutableList()
 
             collectionBooks.sortBy { it.publishYear }
@@ -178,24 +180,27 @@ class CollectionActivity : AppCompatActivity() {
 
     private fun addSampleData() {
         val isbn = "1880418622"
-        val saleBookId = 1
         val publisherDate = 2004
-        val bookCollections = AppDatabase.get(applicationContext).collectionBookDao()
-
-        // check if the book has been already added or not
-        val getCollectionBooks = bookCollections.getCollectionBooks().size
 
         doAsync {
+            val session = Session(applicationContext)
+            val userId = session.getLoggedInUser()!!.id!!
+
+            val bookCollections = AppDatabase.get(applicationContext).collectionBookDao()
+
+            // check if the book has been already added or not
+            val getCollectionBooks = bookCollections.getCollectionBooks(userId).size
+
             if (getCollectionBooks < 1) {
                 val collectionBook = CollectionBook(
-                    uid = null,
                     isbn = isbn,
                     title = "The Dark Tower VII",
                     author = "Stephen King",
                     publishYear = publisherDate,
                     isRead = true,
                     picturePath = "drawable://" + R.drawable.darktower7,
-                    saleBookId = 1
+                    saleBookId = 1,
+                    ownerId = userId
                 )
 
                 val createEntry = bookCollections.insert(collectionBook)

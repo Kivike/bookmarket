@@ -88,8 +88,7 @@ class SellBookActivity : AppCompatActivity() {
             val price = findViewById<EditText>(R.id.field_price).text.toString().toFloat()
 
             val saleBook = SaleBook(
-                uid = null,
-                collectionBookId = collectionBook.uid!!,
+                collectionBookId = collectionBook.id!!,
                 price = price,
                 comment = findViewById<EditText>(R.id.field_comments).toString()
             )

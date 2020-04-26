@@ -130,9 +130,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
             if (user != null) {
                 val accountsIntent = Intent(activity, CollectionActivity::class.java)
-                accountsIntent.putExtra(
-                    "EMAIL",
-                    textInputEditTextEmail.text.toString().trim { it <= ' ' })
+                Session(applicationContext).setLoggedInUser(user)
                 startActivity(accountsIntent)
             } else {
                 // Snack Bar to show success message that record is wrong
