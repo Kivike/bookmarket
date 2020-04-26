@@ -17,6 +17,7 @@ import org.jetbrains.anko.uiThread
 class BuyBookActivity : AppCompatActivity() {
     lateinit var buyBook: BuyBook
     lateinit var collectionBook: CollectionBook
+//    lateinit var marketplaceBook: MarketplaceBook
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,20 +36,25 @@ class BuyBookActivity : AppCompatActivity() {
     }
 
     private fun setBookInfo() {
+//        val currentUserId = intent.getIntExtra("currentUserId", 0)
         val bookId = intent.getIntExtra("bookId", 0)
 //        if (::collectionBook.isInitialized) {
             doAsync {
+//                val userId = Session(applicationContext).getLoggedInUser()!!.id!!
                 val db = AppDatabase.get(applicationContext)
-                collectionBook = db.collectionBookDao().getCollectionBook(bookId)
+                val marketplaceBook = db.marketplaceBookDao().getAllMarketplaceBooks(bookId)
+                collectionBook = db.marketplaceBookDao().getAllMarketplaceBooks(bookId)
 
                 uiThread {
     //                findViewById<TextView>(R.id.abb_edit_title).text
     //                val textView : TextView = findViewById(R.id.abb_edit_title) as TextView
     //                textView.text = testdata
-                    findViewById<TextView>(R.id.abb_edit_title).text = collectionBook.title
-                    findViewById<TextView>(R.id.abb_edit_author).text = collectionBook.author
-                    findViewById<TextView>(R.id.abb_edit_condition).text = "test condition" // check if exists
-                    findViewById<TextView>(R.id.abb_edit_price).text = "999999"
+//                    findViewById<TextView>(R.id.abb_edit_title).text = marketplaceBook.collectionBook.title
+                    findViewById<TextView>(R.id.abb_edit_title).text = marketplaceBook.title
+                    findViewById<TextView>(R.id.abb_edit_author).text = marketplaceBook.author
+                    findViewById<TextView>(R.id.abb_edit_condition).text = marketplaceBook. // check if exists
+                    findViewById<TextView>(R.id.abb_edit_price).text = marketplaceBook.price
+//                    findViewById<TextView>(R.id.abb_edit_price).text = marketplaceBook.collectionBook.price
                     findViewById<TextView>(R.id.abb_edit_comment).text = "This is a test comment replace with sellbookactivity data later on"
 
                     if (collectionBook.picturePath != null) {
@@ -60,6 +66,34 @@ class BuyBookActivity : AppCompatActivity() {
 
 //        }
     }
+
+
+//    private fun setBookInfo() {
+//        val bookId = intent.getIntExtra("bookId", 0)
+////        if (::collectionBook.isInitialized) {
+//            doAsync {
+//                val db = AppDatabase.get(applicationContext)
+//                collectionBook = db.collectionBookDao().getCollectionBook(bookId)
+//
+//                uiThread {
+//    //                findViewById<TextView>(R.id.abb_edit_title).text
+//    //                val textView : TextView = findViewById(R.id.abb_edit_title) as TextView
+//    //                textView.text = testdata
+//                    findViewById<TextView>(R.id.abb_edit_title).text = collectionBook.title
+//                    findViewById<TextView>(R.id.abb_edit_author).text = collectionBook.author
+//                    findViewById<TextView>(R.id.abb_edit_condition).text = "test condition" // check if exists
+//                    findViewById<TextView>(R.id.abb_edit_price).text = "999999"
+//                    findViewById<TextView>(R.id.abb_edit_comment).text = "This is a test comment replace with sellbookactivity data later on"
+//
+//                    if (collectionBook.picturePath != null) {
+//                        val pictureBitmap = BitmapFactory.decodeFile(collectionBook.picturePath)
+//                        findViewById<ImageView>(R.id.book_picture).setImageBitmap(pictureBitmap)
+//                    }
+//                }
+//            }
+//
+////        }
+//    }
 
     private fun onBuybuttonClick() {
         val abbBuy = findViewById<Button>(R.id.abb_buy)
