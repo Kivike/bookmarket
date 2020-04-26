@@ -99,6 +99,9 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
 
                 val isbn = searchFragment.getLastSearchQuery()
 
+                if (currentPicPath == null) {
+                    currentPicPath = book.volumeInfo.imageLinks.thumbnail
+                }
                 doAsync {
                     val collectionBook = CollectionBook(
                         isbn = isbn,

@@ -38,8 +38,7 @@ class CollectionAdapter(
         }
 
         if (book.picturePath != null) {
-            val pictureBitmap = BitmapFactory.decodeFile(book.picturePath)
-            row.book_image.setImageBitmap(pictureBitmap)
+            row.book_image.setImageBitmap(BookPictureLoader(applicationContext).load(book)!!)
         }
 
         initMenu(position, row, book)

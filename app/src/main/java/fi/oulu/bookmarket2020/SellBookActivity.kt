@@ -1,7 +1,7 @@
 package fi.oulu.bookmarket2020
 
 import android.content.Intent
-import android.graphics.BitmapFactory
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import fi.oulu.bookmarket2020.model.AppDatabase
 import fi.oulu.bookmarket2020.model.CollectionBook
@@ -56,8 +55,9 @@ class SellBookActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.book_published).text = collectionBook.publishYear.toString()
 
                 if (collectionBook.picturePath != null) {
-                    val pictureBitmap = BitmapFactory.decodeFile(collectionBook.picturePath)
-                    findViewById<ImageView>(R.id.book_picture).setImageBitmap(pictureBitmap)
+                    findViewById<ImageView>(R.id.book_picture).setImageBitmap(
+                        BookPictureLoader(applicationContext).load(collectionBook)!!
+                    )
                 }
             }
         }
