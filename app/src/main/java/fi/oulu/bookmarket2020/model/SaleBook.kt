@@ -7,7 +7,7 @@ import androidx.room.*
     indices = [Index(value = ["collectionBookId"], unique = true)]
 )
 data class SaleBook(
-    @PrimaryKey(autoGenerate = true) var uid: Int?,
+    @PrimaryKey(autoGenerate = true) var id: Int? = null,
     @ColumnInfo(name = "collectionBookId") var collectionBookId: Int,
     @ColumnInfo(name = "price") var price: Float,
 //    @ColumnInfo(name = "condition") var condition: String,
@@ -23,6 +23,6 @@ interface SaleBookDao {
     @Query("SELECT * FROM sale_book")
     fun getCollectionBooks(): List<SaleBook>
 
-    @Query("DELETE FROM sale_book WHERE uid = :bookId")
+    @Query("DELETE FROM sale_book WHERE id = :bookId")
     fun delete(bookId: Int)
 }

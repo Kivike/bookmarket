@@ -99,22 +99,22 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
 
                 val isbn = searchFragment.getLastSearchQuery()
 
-                val collectionBook = CollectionBook(
-                    uid = null,
-                    isbn = isbn,
-                    title = book.volumeInfo.title,
-                    author = book.volumeInfo.authors.first(),
-                    publishYear = Integer.valueOf(book.volumeInfo.publishedDate.split('-')[0]),
-                    isRead = markReadCb.isChecked,
-                    picturePath = currentPicPath,
-                    saleBookId = null
-                )
-
                 doAsync {
+                    val collectionBook = CollectionBook(
+                        isbn = isbn,
+                        title = book.volumeInfo.title,
+                        author = book.volumeInfo.authors.first(),
+                        publishYear = Integer.valueOf(book.volumeInfo.publishedDate.split('-')[0]),
+                        isRead = markReadCb.isChecked,
+                        picturePath = currentPicPath,
+                        saleBookId = null,
+                        ownerId = Session(applicationContext).getLoggedInUser()!!.id!!
+                    )
+
                     val db = AppDatabase.get(applicationContext)
 
                     val uid = db.collectionBookDao().insert(collectionBook).toInt()
-                    collectionBook.uid = uid
+                    collectionBook.id = uid
 
                     uiThread {
                         Toast.makeText(
@@ -143,7 +143,7 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
 
     private fun startSellBookActivity(book: CollectionBook) {
         val intent = Intent(applicationContext, SellBookActivity::class.java)
-        intent.putExtra("bookId", book.uid)
+        intent.putExtra("bookId", book.id)
         startActivity(intent)
     }
 
