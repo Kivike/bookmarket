@@ -47,7 +47,7 @@ class BuyBookActivity : AppCompatActivity() {
     //                textView.text = testdata
                     findViewById<TextView>(R.id.abb_edit_title).text = collectionBook.title
                     findViewById<TextView>(R.id.abb_edit_author).text = collectionBook.author
-                    findViewById<TextView>(R.id.abb_condition).text = "test condition" // check if exists
+                    findViewById<TextView>(R.id.abb_edit_condition).text = "test condition" // check if exists
                     findViewById<TextView>(R.id.abb_edit_price).text = "999999"
                     findViewById<TextView>(R.id.abb_edit_comment).text = "This is a test comment replace with sellbookactivity data later on"
 
