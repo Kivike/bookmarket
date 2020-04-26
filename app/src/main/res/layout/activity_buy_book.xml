@@ -54,10 +54,10 @@
                     <TextView
                         android:layout_height="25dp"
                         android:layout_width="match_parent"
-                        android:text="Authur"
-                        android:id="@+id/abb_authur"/>
+                        android:text="Author"
+                        android:id="@+id/abb_author"/>
                     <TextView
-                        android:id="@+id/abb_edit_authur"
+                        android:id="@+id/abb_edit_author"
                         android:text="Stephen King "
                         android:inputType="text"/>
                 </TableRow>

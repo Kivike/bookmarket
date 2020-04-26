@@ -204,7 +204,6 @@
 
     <Button
         android:id="@+id/btn_submit"
-        android:enabled="false"
         android:layout_width="135dp"
         android:layout_height="49dp"
         android:layout_marginRight="30dp"

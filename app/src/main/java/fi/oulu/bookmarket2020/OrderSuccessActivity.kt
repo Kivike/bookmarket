@@ -20,4 +20,17 @@ class OrderSuccessActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+/*
+    private fun setBookInfo() {
+        val bookId = intent.getIntExtra("bookId", 0)
+
+        doAsync {
+            val db = AppDatabase.get(applicationContext)
+            collectionBook = db.collectionBookDao().getCollectionBook(bookId)
+
+            findViewById<TextView>(R.id.book_title).text = collectionBook.title
+            findViewById<TextView>(R.id.book_author).text = collectionBook.author
+            findViewById<TextView>(R.id.book_published).text = collectionBook.publishYear.toString()
+        }
+    } */
 }

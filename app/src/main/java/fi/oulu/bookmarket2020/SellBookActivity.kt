@@ -1,12 +1,12 @@
 package fi.oulu.bookmarket2020
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import fi.oulu.bookmarket2020.model.AppDatabase
 import fi.oulu.bookmarket2020.model.CollectionBook

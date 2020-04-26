@@ -178,7 +178,6 @@ class CollectionActivity : AppCompatActivity() {
 
     private fun addSampleData() {
         val isbn = "1880418622"
-        val saleBookId = 1
         val publisherDate = 2004
         val bookCollections = AppDatabase.get(applicationContext).collectionBookDao()
 

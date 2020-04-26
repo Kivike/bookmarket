@@ -10,6 +10,7 @@ data class SaleBook(
     @PrimaryKey(autoGenerate = true) var uid: Int?,
     @ColumnInfo(name = "collectionBookId") var collectionBookId: Int,
     @ColumnInfo(name = "price") var price: Float,
+//    @ColumnInfo(name = "condition") var condition: String,
     @ColumnInfo(name = "comment") var comment: String
 )
 
