@@ -63,7 +63,7 @@
         android:id="@+id/collection_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@color/colorBackgroundLight"
         android:clipToPadding="false"
         android:dividerHeight="1sp"

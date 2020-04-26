@@ -2,7 +2,6 @@ package fi.oulu.bookmarket2020
 
 import android.content.Intent
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,11 +10,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import fi.oulu.bookmarket2020.model.AppDatabase
 import fi.oulu.bookmarket2020.model.CollectionBook
 import fi.oulu.bookmarket2020.model.SaleBook
-import kotlinx.android.synthetic.main.collection_list_item.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -95,7 +94,10 @@ class SellBookActivity : AppCompatActivity() {
 
             doAsync {
                 val db = AppDatabase.get(applicationContext)
-                db.saleBookDao().insert(saleBook)
+                val saleBookId = db.saleBookDao().insert(saleBook).toInt()
+
+                collectionBook.saleBookId = saleBookId
+                db.collectionBookDao().update(collectionBook)
 
                 val intent = Intent(applicationContext, CollectionActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

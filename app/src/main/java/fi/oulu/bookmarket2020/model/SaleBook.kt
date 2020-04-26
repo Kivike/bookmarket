@@ -21,7 +21,7 @@ interface SaleBookDao {
     fun insert(book: SaleBook): Long
 
     @Query("SELECT * FROM sale_book")
-    fun getCollectionBooks(): List<SaleBook>
+    fun getSaleBooks(): List<SaleBook>
 
     @Query("DELETE FROM sale_book WHERE id = :bookId")
     fun delete(bookId: Int)
