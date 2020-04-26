@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_search" android:id="@+id/toolbar" />
+        <include layout="@layout/toolbar" android:id="@+id/toolbar" />
         <include layout="@layout/content_marketplace" android:id="@+id/content" />
     </LinearLayout>
 

@@ -22,6 +22,9 @@ interface CollectionBookDao {
     @Transaction @Insert
     fun insert(book: CollectionBook): Long
 
+    @Update
+    fun update(book: CollectionBook)
+
     @Query("SELECT * FROM collection_book WHERE owner_id = :ownerId")
     fun getCollectionBooks(ownerId: Int): List<CollectionBook>
 

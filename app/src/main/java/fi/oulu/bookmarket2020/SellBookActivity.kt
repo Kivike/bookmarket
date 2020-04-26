@@ -89,12 +89,16 @@ class SellBookActivity : AppCompatActivity() {
             val saleBook = SaleBook(
                 collectionBookId = collectionBook.id!!,
                 price = price,
+                condition = findViewById<EditText>(R.id.field_condition).toString(),
                 comment = findViewById<EditText>(R.id.field_comments).toString()
             )
 
             doAsync {
                 val db = AppDatabase.get(applicationContext)
-                db.saleBookDao().insert(saleBook)
+                val saleBookId = db.saleBookDao().insert(saleBook).toInt()
+
+                collectionBook.saleBookId = saleBookId
+                db.collectionBookDao().update(collectionBook)
 
                 val intent = Intent(applicationContext, CollectionActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

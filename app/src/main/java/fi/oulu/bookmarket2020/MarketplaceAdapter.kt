@@ -8,19 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import fi.oulu.bookmarket2020.model.CollectionBook
+import fi.oulu.bookmarket2020.model.MarketplaceBook
 import kotlinx.android.synthetic.main.collection_list_item.view.*
 
 class MarketplaceAdapter(
     private val applicationContext: Context,
     private val activityContext: Context,
-    private val list: MutableList<CollectionBook>
+    private val list: MutableList<MarketplaceBook>
 ) : BaseAdapter() {
 
     private val inflater: LayoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val row = convertView ?: inflater.inflate(R.layout.collection_list_item, parent, false)
 
-        val book = getItem(position) as CollectionBook
+        val marketplaceBook = getItem(position) as MarketplaceBook
+        val book = marketplaceBook.collectionBook
         row.book_title.text = book.title
         row.book_author.text = book.author
         row.book_published.text = book.publishYear.toString()

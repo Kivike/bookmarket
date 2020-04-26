@@ -62,6 +62,9 @@ class CollectionAdapter(
             val popup = PopupMenu(activityContext, button)
             popup.menuInflater.inflate(R.menu.collection_item_menu, popup.menu)
 
+            if (book.saleBookId != null) {
+                popup.menu.findItem(R.id.sell).isVisible = false
+            }
             popup.setOnMenuItemClickListener {
                     item: MenuItem? ->
                 when (item!!.itemId) {
