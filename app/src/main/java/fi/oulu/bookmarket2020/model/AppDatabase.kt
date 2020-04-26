@@ -10,6 +10,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun collectionBookDao() : CollectionBookDao
     abstract fun saleBookDao() : SaleBookDao
     abstract fun userDao(): UserDao
+    abstract fun marketplaceBookDao() : MarketplaceBookDao
 
     companion object {
         var db: AppDatabase? = null
