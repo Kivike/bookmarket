@@ -1,6 +1,7 @@
 package fi.oulu.bookmarket2020
 
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         initListeners()
         // initializing the objects
         initObjects()
+
+        addSampleData()
     }
 
     private fun configureToolbar() {
@@ -191,6 +194,34 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
+    }
+
+    private fun addSampleData()
+    {
+        doAsync {
+            val userDao = AppDatabase.get(applicationContext).userDao()
+            val users = arrayOf(
+                User(
+                    id = 1,
+                    name = "Alice",
+                    email = "1@1.1",
+                    password = "123"
+                ),
+                User(
+                    id = 2,
+                    name = "Charlie",
+                    email = "2@2.2",
+                    password = "123"
+                )
+            )
+            for (user in users) {
+                try {
+                    userDao.addUser(user)
+                } catch (e: SQLiteConstraintException) {
+                    userDao.updateUser(user)
+                }
+            }
+        }
     }
 
     /**

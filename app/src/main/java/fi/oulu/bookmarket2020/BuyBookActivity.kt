@@ -13,6 +13,7 @@ import fi.oulu.bookmarket2020.model.BuyBook
 import fi.oulu.bookmarket2020.model.CollectionBook
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.net.URL
 
 class BuyBookActivity : AppCompatActivity() {
     lateinit var buyBook: BuyBook
@@ -51,10 +52,9 @@ class BuyBookActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.abb_edit_price).text = "999999"
                     findViewById<TextView>(R.id.abb_edit_comment).text = "This is a test comment replace with sellbookactivity data later on"
 
-                    if (collectionBook.picturePath != null) {
-                        val pictureBitmap = BitmapFactory.decodeFile(collectionBook.picturePath)
-                        findViewById<ImageView>(R.id.book_picture).setImageBitmap(pictureBitmap)
-                    }
+                    findViewById<ImageView>(R.id.book_picture).setImageBitmap(
+                        BookPictureLoader(applicationContext).load(collectionBook)
+                    )
                 }
             }
 

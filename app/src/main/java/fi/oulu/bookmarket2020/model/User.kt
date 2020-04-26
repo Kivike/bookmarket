@@ -18,6 +18,9 @@ interface UserDao {
     @Insert
     fun addUser(user: User): Long
 
+    @Update
+    fun updateUser(user: User)
+
     @Query("SELECT * FROM user WHERE email = :email LIMIT 1")
     fun getUser(email: String): User?
 
