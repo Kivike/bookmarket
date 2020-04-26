@@ -2,7 +2,9 @@ package fi.oulu.bookmarket2020
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +25,7 @@ import java.io.File
 import java.io.IOException
 import fi.oulu.bookmarket2020.model.AppDatabase
 import org.jetbrains.anko.uiThread
+import java.io.FileOutputStream
 
 class CollectionAddActivity : AppCompatActivity(), SearchListener {
 
@@ -183,14 +186,39 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             if (resultCode == Activity.RESULT_OK) {
-                val pictureBitmap = BitmapFactory.decodeFile(currentPicPath)
+                var pictureBitmap = BitmapFactory.decodeFile(currentPicPath)
+
+                // Rotate to portrait
+                pictureBitmap = rotateBitmap(pictureBitmap, 90f)
                 pictureFrame.setImageBitmap(pictureBitmap)
+
+                val out = FileOutputStream(currentPicPath!!)
+
+                // Save rotated picture
+                pictureBitmap.compress(Bitmap.CompressFormat.JPEG, 85, out)
             } else {
                 currentPicPath = null
             }
         }
+    }
+
+    private fun rotateBitmap(bitmap: Bitmap, degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+
+        return Bitmap.createBitmap(
+            bitmap,
+            0,
+            0,
+            bitmap.width,
+            bitmap.height,
+            matrix,
+            true
+        )
     }
 
     override fun onResult(book: Volume?) {
