@@ -2,7 +2,6 @@ package fi.oulu.bookmarket2020
 
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
