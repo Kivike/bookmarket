@@ -26,11 +26,10 @@ class CollectionAdapter(
     private val inflater: LayoutInflater = applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val row = inflater.inflate(R.layout.collection_list_item, parent, false)
-
+        val row = convertView ?: inflater.inflate(R.layout.collection_list_item, parent, false)
         val book = getItem(position) as CollectionBook
 
-        row.book_title.text = book.title
+        row!!.book_title.text = book.title
         row.book_author.text = book.author
         row.book_published.text = book.publishYear.toString()
 
