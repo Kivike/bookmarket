@@ -24,11 +24,11 @@ class CollectionActivity : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
 
-    var appliedFilter: Int? = null
-    var appliedSorting: Int? = null
+    private var appliedFilter: Int? = null
+    private var appliedSorting: Int? = null
 
-    lateinit var filterPopupMenu: PopupMenu
-    lateinit var sortingPopupMenu: PopupMenu
+    private lateinit var filterPopupMenu: PopupMenu
+    private lateinit var sortingPopupMenu: PopupMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
