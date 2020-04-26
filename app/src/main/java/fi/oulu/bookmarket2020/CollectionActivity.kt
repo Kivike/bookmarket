@@ -115,7 +115,7 @@ class CollectionActivity : AppCompatActivity() {
      * Initialize collection sorting selection
      */
     private fun initSorting() {
-        sortingPopupMenu = PopupMenu(this, collection_filters)
+        sortingPopupMenu = PopupMenu(this, collection_sorting)
         sortingPopupMenu.menuInflater.inflate(R.menu.sorting_menu, sortingPopupMenu.menu)
 
         for (menuItem in sortingPopupMenu.menu.children) {

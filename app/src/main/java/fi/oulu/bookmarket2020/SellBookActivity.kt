@@ -89,8 +89,8 @@ class SellBookActivity : AppCompatActivity() {
             val saleBook = SaleBook(
                 collectionBookId = collectionBook.id!!,
                 price = price,
-                condition = findViewById<EditText>(R.id.field_condition).toString(),
-                comment = findViewById<EditText>(R.id.field_comments).toString()
+                condition = findViewById<EditText>(R.id.field_condition).text.toString(),
+                comment = findViewById<EditText>(R.id.field_comments).text.toString()
             )
 
             doAsync {

@@ -2,13 +2,13 @@ package fi.oulu.bookmarket2020
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import fi.oulu.bookmarket2020.model.AppDatabase
-import fi.oulu.bookmarket2020.model.BuyBook
 import fi.oulu.bookmarket2020.model.MarketplaceBook
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -47,17 +47,31 @@ class BuyBookActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.abb_edit_price).text = saleBook.price.toString() + " €"
                     findViewById<TextView>(R.id.abb_edit_comment).text = saleBook.comment
 
-                    findViewById<ImageView>(R.id.book_picture).setImageBitmap(
+                    findViewById<ImageView>(R.id.abb_image).setImageBitmap(
                         BookPictureLoader(applicationContext).load(collectionBook)
                     )
                 }
             }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun onBuyButtonClick() {
         val abbBuy = findViewById<Button>(R.id.abb_buy)
         abbBuy.setOnClickListener {
-            marketplaceBook.collectionBook
+            // Add bought book to your own collection
+            val ownedBook = marketplaceBook.collectionBook.copy()
+            ownedBook.ownerId = Session(applicationContext).getLoggedInUser()!!.id!!
+            ownedBook.saleBookId = null
+
+            val db = AppDatabase.get(applicationContext)
+            db.collectionBookDao().insert(ownedBook)
 
             //1. goto order placed
             val intent = Intent(applicationContext, OrderSuccessActivity::class.java )
