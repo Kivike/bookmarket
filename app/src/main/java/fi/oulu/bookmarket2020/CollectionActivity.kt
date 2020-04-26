@@ -24,11 +24,11 @@ class CollectionActivity : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
 
-    var appliedFilter: Int? = null
-    var appliedSorting: Int? = null
+    private var appliedFilter: Int? = null
+    private var appliedSorting: Int? = null
 
-    lateinit var filterPopupMenu: PopupMenu
-    lateinit var sortingPopupMenu: PopupMenu
+    private lateinit var filterPopupMenu: PopupMenu
+    private lateinit var sortingPopupMenu: PopupMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +58,6 @@ class CollectionActivity : AppCompatActivity() {
                 R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly()
                 else -> db.collectionBookDao().getCollectionBooks()
             }.toMutableList()
-
-            collectionBooks.sortBy { it.publishYear }
 
             when (appliedSorting) {
                 R.id.sorting_author_asc -> collectionBooks.sortBy { it.author }
@@ -150,6 +148,9 @@ class CollectionActivity : AppCompatActivity() {
         refreshCollection()
     }
 
+    /**
+     * Init toolbar and navigation drawer
+     */
     private fun initToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -169,6 +170,9 @@ class CollectionActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener(navFragment)
     }
 
+    /**
+     * Initialize FAB that starts activity to add a book to collection
+     */
     private fun initAddBookButton() {
         fab_add_book.setOnClickListener {
             val intent = Intent(applicationContext, CollectionAddActivity::class.java)
