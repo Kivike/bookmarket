@@ -57,7 +57,6 @@ class CollectionActivity : AppCompatActivity() {
             val db = AppDatabase.get(applicationContext)
 
             val collectionBooks = when (appliedFilter) {
-                R.id.filter_read -> db.collectionBookDao().getCollectionBookReadOnly(userId)
                 R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly(userId)
                 else -> db.collectionBookDao().getCollectionBooks(userId)
             }.toMutableList()
@@ -215,7 +214,6 @@ class CollectionActivity : AppCompatActivity() {
                     title = "The Dark Tower VII",
                     author = "Stephen King",
                     publishYear = publisherDate,
-                    isRead = true,
                     picturePath = "drawable://" + R.drawable.darktower7,
                     saleBookId = 1,
                     ownerId = userId

@@ -94,7 +94,6 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
             val book = searchFragment.getLastResult()
 
             if (book != null) {
-                val markReadCb = findViewById<CheckBox>(R.id.cb_markread)
                 val sellCb = findViewById<CheckBox>(R.id.cb_sell)
 
                 val isbn = searchFragment.getLastSearchQuery()
@@ -105,7 +104,6 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
                         title = book.volumeInfo.title,
                         author = book.volumeInfo.authors.first(),
                         publishYear = Integer.valueOf(book.volumeInfo.publishedDate.split('-')[0]),
-                        isRead = markReadCb.isChecked,
                         picturePath = currentPicPath,
                         saleBookId = null,
                         ownerId = Session(applicationContext).getLoggedInUser()!!.id!!

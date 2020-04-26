@@ -32,8 +32,6 @@
     <string name="profile">Profile</string>
     <string name="book_comment">Book is in very good condition. This is one of the most interesting Book. I am sure you would love it </string>
 
-    <string name="mark_as_read">Mark as read</string>
-
     <string name="text_accounts">All Accounts</string>
     <string name="hint_fname">First Name</string>
     <string name="hint_lname">Last Name</string>
