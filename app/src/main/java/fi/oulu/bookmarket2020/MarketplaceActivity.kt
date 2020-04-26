@@ -19,7 +19,6 @@ class MarketplaceActivity : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
 
-    private var appliedFilter: Int? = null
     private var appliedSorting: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,13 +41,6 @@ class MarketplaceActivity : AppCompatActivity() {
         doAsync {
             val userId = Session(applicationContext).getLoggedInUser()!!.id!!
             val db = AppDatabase.get(applicationContext)
-//            val collectionBooks = when (appliedFilter) {
-//                R.id.filter_read -> db.collectionBookDao().getCollectionBookReadOnly(userId)
-//                R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly(userId)
-//                else -> db.collectionBookDao().getCollectionBooks(userId)
-//            }.toMutableList()
-//
-//            collectionBooks.sortBy{ it.publishYear }
 
             val marketplaceBooks = db.marketplaceBookDao().getMarketplaceBooks(userId).toMutableList()
 

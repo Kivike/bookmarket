@@ -8,7 +8,7 @@ data class MarketplaceBook(
         parentColumn = "id",
         entityColumn = "collectionBookId"
     )
-    val saleBook: SaleBook?
+    val saleBook: SaleBook
 )
 
 @Dao
@@ -19,5 +19,5 @@ interface MarketplaceBookDao {
     fun getMarketplaceBooks(currentUserId: Int): List<MarketplaceBook>
 
     @Query("SELECT * FROM collection_book WHERE id = :bookId")
-    fun getMarketplaceBook(bookId: Int): CollectionBook
+    fun getMarketplaceBook(bookId: Int): MarketplaceBook
 }
