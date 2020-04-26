@@ -43,28 +43,22 @@ class MarketplaceActivity : AppCompatActivity() {
             val userId = Session(applicationContext).getLoggedInUser()!!.id!!
             val db = AppDatabase.get(applicationContext)
 
-            val collectionBooks = when(appliedFilter) {
-                R.id.filter_read -> db.collectionBookDao().getCollectionBookReadOnly(userId)
-                R.id.filter_sell -> db.collectionBookDao().getCollectionBookSoldOnly(userId)
-                else -> db.collectionBookDao().getCollectionBooks(userId)
-            }.toMutableList()
-
-            collectionBooks.sortBy{ it.publishYear }
+            val marketplaceBooks = db.marketplaceBookDao().getMarketplaceBooks(userId).toMutableList()
 
             when(appliedSorting) {
-                R.id.sorting_author_asc -> collectionBooks.sortBy { it.author }
-                R.id.sorting_author_desc -> collectionBooks.sortByDescending { it.author }
-                R.id.sorting_title_asc -> collectionBooks.sortBy { it.title }
-                R.id.sorting_title_desc -> collectionBooks.sortByDescending { it.title }
-                R.id.sorting_published_asc -> collectionBooks.sortBy { it.publishYear }
-                R.id.sorting_published_desc -> collectionBooks.sortByDescending { it.publishYear }
+                R.id.sorting_author_asc -> marketplaceBooks.sortBy { it.collectionBook.author }
+                R.id.sorting_author_desc -> marketplaceBooks.sortByDescending { it.collectionBook.author }
+                R.id.sorting_title_asc -> marketplaceBooks.sortBy { it.collectionBook.title }
+                R.id.sorting_title_desc -> marketplaceBooks.sortByDescending { it.collectionBook.title }
+                R.id.sorting_published_asc -> marketplaceBooks.sortBy { it.collectionBook.publishYear }
+                R.id.sorting_published_desc -> marketplaceBooks.sortByDescending { it.collectionBook.publishYear }
             }
 
             uiThread {
                 val adapter = MarketplaceAdapter(
                     applicationContext,
                     this@MarketplaceActivity,
-                    collectionBooks
+                    marketplaceBooks
                 )
                 content.collection_list.adapter = adapter
             }
