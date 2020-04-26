@@ -35,7 +35,7 @@ class MarketplaceAdapter(
         }
 
         row.collection_list_items.setOnClickListener {
-            startBuyBookActivity()
+            startBuyBookActivity(book)
         }
 
         return row
@@ -53,8 +53,9 @@ class MarketplaceAdapter(
         return list.size
     }
 
-    private fun startBuyBookActivity() {
+    private fun startBuyBookActivity(book: CollectionBook) {
         val intent = Intent(applicationContext, BuyBookActivity::class.java)
+        intent.putExtra("bookId", book.id)
         activityContext.startActivity(intent)
     }
 }
