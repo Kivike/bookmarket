@@ -57,6 +57,9 @@ class CollectionAdapter(
         return list.size
     }
 
+    /**
+     * Init the action menu
+     */
     private fun initMenu(position: Int, row: View, book: CollectionBook) {
         row.menu_button.setOnClickListener { button: View ->
             val popup = PopupMenu(activityContext, button)

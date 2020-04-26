@@ -9,6 +9,9 @@ import com.google.android.material.navigation.NavigationView
 class NavFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 {
 
+    /**
+     * Handle selected navigation menu item
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.nav_collection -> {

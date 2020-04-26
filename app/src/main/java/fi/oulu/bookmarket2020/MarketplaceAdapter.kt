@@ -3,6 +3,7 @@ package fi.oulu.bookmarket2020
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

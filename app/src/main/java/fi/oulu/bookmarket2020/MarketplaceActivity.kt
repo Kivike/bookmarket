@@ -45,6 +45,9 @@ class MarketplaceActivity : AppCompatActivity() {
         refreshMarketplaceList()
     }
 
+    /**
+     * Refresh books in marketplace listing
+     */
     private fun refreshMarketplaceList() {
         doAsync {
             val userId = Session(applicationContext).getLoggedInUser()!!.id!!

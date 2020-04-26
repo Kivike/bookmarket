@@ -56,6 +56,9 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
+    /**
+     * Init book search from google API
+     */
     private fun initBookSearch() {
         var searchFragment = supportFragmentManager.findFragmentByTag(SEARCH_FRAGMENT_TAG)
         val isbnInput = findViewById<EditText>(R.id.isbn_input)
@@ -85,6 +88,9 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
         }
     }
 
+    /**
+     * Init form submit
+     */
     private fun initSubmit()
     {
         val submitButton = findViewById<Button>(R.id.btn_submit)
@@ -137,6 +143,9 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
         }
     }
 
+    /**
+     * Handle toolbar back button press
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
@@ -145,12 +154,18 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Put book on sale
+     */
     private fun startSellBookActivity(book: CollectionBook) {
         val intent = Intent(applicationContext, SellBookActivity::class.java)
         intent.putExtra("bookId", book.id)
         startActivity(intent)
     }
 
+    /**
+     * Init book picture capture by camera
+     */
     private fun initPictureCapture() {
         pictureFrame = findViewById<ImageView>(R.id.book_picture)
 
@@ -177,6 +192,9 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
         }
     }
 
+    /**
+     * Create temp image file
+     */
     private fun createImageFile(): File {
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
@@ -189,6 +207,9 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
         }
     }
 
+    /**
+     * Handle captured photo
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -225,6 +246,9 @@ class CollectionAddActivity : AppCompatActivity(), SearchListener {
         )
     }
 
+    /**
+     * Handle book found with API
+     */
     override fun onResult(book: Volume?) {
         val bookDetails = findViewById<Group>(R.id.book_details)
 

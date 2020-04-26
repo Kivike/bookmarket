@@ -62,20 +62,27 @@ class BuyBookActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Handle buy event
+     */
     private fun onBuyButtonClick() {
         val abbBuy = findViewById<Button>(R.id.abb_buy)
         abbBuy.setOnClickListener {
             // Add bought book to your own collection
             val ownedBook = marketplaceBook.collectionBook.copy()
-            ownedBook.ownerId = Session(applicationContext).getLoggedInUser()!!.id!!
-            ownedBook.saleBookId = null
 
-            val db = AppDatabase.get(applicationContext)
-            db.collectionBookDao().insert(ownedBook)
+            doAsync {
+                ownedBook.id = null
+                ownedBook.ownerId = Session(applicationContext).getLoggedInUser()!!.id!!
+                ownedBook.saleBookId = null
 
-            //1. goto order placed
-            val intent = Intent(applicationContext, OrderSuccessActivity::class.java )
-            startActivity(intent)
+                val db = AppDatabase.get(applicationContext)
+                db.collectionBookDao().insert(ownedBook)
+
+                //1. goto order placed
+                val intent = Intent(applicationContext, OrderSuccessActivity::class.java )
+                startActivity(intent)
+            }
         }
     }
 }
