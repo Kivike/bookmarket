@@ -59,8 +59,6 @@ class CollectionActivity : AppCompatActivity() {
                 else -> db.collectionBookDao().getCollectionBooks()
             }.toMutableList()
 
-            collectionBooks.sortBy { it.publishYear }
-
             when (appliedSorting) {
                 R.id.sorting_author_asc -> collectionBooks.sortBy { it.author }
                 R.id.sorting_author_desc -> collectionBooks.sortByDescending { it.author }
@@ -150,6 +148,9 @@ class CollectionActivity : AppCompatActivity() {
         refreshCollection()
     }
 
+    /**
+     * Init toolbar and navigation drawer
+     */
     private fun initToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -169,6 +170,9 @@ class CollectionActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener(navFragment)
     }
 
+    /**
+     * Initialize FAB that starts activity to add a book to collection
+     */
     private fun initAddBookButton() {
         fab_add_book.setOnClickListener {
             val intent = Intent(applicationContext, CollectionAddActivity::class.java)
