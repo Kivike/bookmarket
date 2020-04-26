@@ -27,9 +27,7 @@ class MarketplaceAdapter(
         row.book_author.text = book.author
         row.book_published.text = book.publishYear.toString()
 
-        if (book.saleBookId == null) {
-            row.sale_status.visibility = View.GONE
-        }
+        row.sale_status.text = marketplaceBook.saleBook!!.price.toString() + " €"
 
         if (book.picturePath != null) {
             val pictureBitmap = BitmapFactory.decodeFile(book.picturePath)

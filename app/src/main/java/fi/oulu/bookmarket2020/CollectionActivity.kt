@@ -207,6 +207,7 @@ class CollectionActivity : AppCompatActivity() {
             // check if the book has been already added or not
             val getCollectionBooks = bookCollections.getCollectionBooks(userId).size
 
+
             if (getCollectionBooks < 1) {
                 val collectionBook = CollectionBook(
                     isbn = isbn,
@@ -215,7 +216,7 @@ class CollectionActivity : AppCompatActivity() {
                     publishYear = publisherDate,
                     isRead = true,
                     picturePath = "drawable://" + R.drawable.darktower7,
-                    saleBookId = 1,
+                    saleBookId = null,
                     ownerId = userId
                 )
 

@@ -12,4 +12,5 @@
     <color name="colorGreyButton">#bbb</color>
     <color name="colorFlavor">#854F2B</color>
     <color name="colorLabel">#D8D2D2</color>
+    <color name="colorPrice">#18B518</color>
 </resources>
