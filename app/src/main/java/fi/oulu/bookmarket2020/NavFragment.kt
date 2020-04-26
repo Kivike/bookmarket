@@ -19,6 +19,11 @@ class NavFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 val intent = Intent(context, MarketplaceActivity::class.java)
                 startActivity(intent)
             }
+            R.id.nav_logout -> {
+                Session(context!!).setLoggedInUser(null)
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
             else -> Toast.makeText(context, "Not yet implemented", Toast.LENGTH_SHORT).show()
         }
         return true
