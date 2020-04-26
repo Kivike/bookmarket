@@ -155,9 +155,7 @@ class CollectionActivity : AppCompatActivity() {
      * Init toolbar and navigation drawer
      */
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setTitle(R.string.collection)
+        toolbar.setTitle(R.string.collection)
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
 

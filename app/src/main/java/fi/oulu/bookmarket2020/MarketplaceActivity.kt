@@ -72,8 +72,7 @@ class MarketplaceActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar.setTitle(R.string.marketplace)
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
 
