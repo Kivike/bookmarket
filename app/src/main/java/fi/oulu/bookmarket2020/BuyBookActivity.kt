@@ -1,7 +1,6 @@
 package fi.oulu.bookmarket2020
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -13,7 +12,6 @@ import fi.oulu.bookmarket2020.model.BuyBook
 import fi.oulu.bookmarket2020.model.CollectionBook
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import java.net.URL
 
 class BuyBookActivity : AppCompatActivity() {
     lateinit var buyBook: BuyBook
@@ -43,8 +41,8 @@ class BuyBookActivity : AppCompatActivity() {
             doAsync {
 //                val userId = Session(applicationContext).getLoggedInUser()!!.id!!
                 val db = AppDatabase.get(applicationContext)
-                val marketplaceBook = db.marketplaceBookDao().getAllMarketplaceBooks(bookId)
-                collectionBook = db.marketplaceBookDao().getAllMarketplaceBooks(bookId)
+                val marketplaceBook = db.marketplaceBookDao().getMarketplaceBook(bookId)
+                collectionBook = db.marketplaceBookDao().getMarketplaceBook(bookId)
 
                 uiThread {
     //                findViewById<TextView>(R.id.abb_edit_title).text
