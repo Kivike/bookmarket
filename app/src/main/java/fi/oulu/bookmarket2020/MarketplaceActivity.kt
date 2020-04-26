@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -12,6 +13,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_collection.*
 import kotlinx.android.synthetic.main.content_collection.view.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class MarketplaceActivity : AppCompatActivity() {
 
@@ -62,5 +65,18 @@ class MarketplaceActivity : AppCompatActivity() {
             .commit()
 
         navView.setNavigationItemSelectedListener(navFragment)
+
+        doAsync {
+            val sessionUserName = Session(applicationContext).getLoggedInUser()!!.name
+
+            uiThread {
+                val navView = findViewById<NavigationView>(R.id.nav_view)
+                val header = navView.getHeaderView(0)
+                header.findViewById<TextView>(R.id.greeting_text).text = getString(
+                    R.string.text_hello,
+                    sessionUserName
+                )
+            }
+        }
     }
 }

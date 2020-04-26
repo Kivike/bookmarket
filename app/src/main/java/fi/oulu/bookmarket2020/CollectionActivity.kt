@@ -3,6 +3,7 @@ package fi.oulu.bookmarket2020
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
@@ -170,6 +171,19 @@ class CollectionActivity : AppCompatActivity() {
             .commit()
 
         navView.setNavigationItemSelectedListener(navFragment)
+
+        doAsync {
+            val sessionUserName = Session(applicationContext).getLoggedInUser()!!.name
+
+            uiThread {
+                val navView = findViewById<NavigationView>(R.id.nav_view)
+                val header = navView.getHeaderView(0)
+                header.findViewById<TextView>(R.id.greeting_text).text = getString(
+                    R.string.text_hello,
+                    sessionUserName
+                )
+            }
+        }
     }
 
     /**
