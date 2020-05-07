@@ -20,6 +20,9 @@ interface SaleBookDao {
     @Insert
     fun insert(book: SaleBook): Long
 
+    @Update
+    fun update(book: SaleBook)
+
     @Query("SELECT * FROM sale_book")
     fun getSaleBooks(): List<SaleBook>
 

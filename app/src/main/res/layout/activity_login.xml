@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_email"
                 android:inputType="text"
+                android:text="1@1.1"
                 android:maxLines="1"
                 android:textColor="@android:color/white" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
+                android:text="123"
                 android:maxLines="1"
                 android:textColor="@android:color/white" />
         </com.google.android.material.textfield.TextInputLayout>

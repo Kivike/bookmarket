@@ -9,7 +9,12 @@ import java.net.URL
 
 class BookPictureLoader(private val context: Context) {
 
-    fun load(book: CollectionBook): Bitmap? {
+    enum class ImgSize(val width: Int) {
+        LISTING(200),
+        FULL(500)
+    }
+
+    fun load(book: CollectionBook, size: ImgSize = ImgSize.LISTING): Bitmap? {
         var pictureBitmap: Bitmap? = null
 
         if (book.picturePath != null) {
@@ -26,7 +31,20 @@ class BookPictureLoader(private val context: Context) {
                 pictureBitmap = BitmapFactory.decodeFile(path)
             }
         }
+
+        if (pictureBitmap != null) {
+            pictureBitmap = scaleBitmap(pictureBitmap, size)
+        }
         return pictureBitmap
 
+    }
+
+    private fun scaleBitmap(bitmap: Bitmap, size: ImgSize): Bitmap {
+        val w = bitmap.width.toFloat()
+        val h = bitmap.height.toFloat()
+        val aspectRatio = w / h
+        val scaledW = size.width.toFloat()
+        val scaledH = scaledW / aspectRatio
+        return Bitmap.createScaledBitmap(bitmap, scaledW.toInt(), scaledH.toInt(), false)
     }
 }

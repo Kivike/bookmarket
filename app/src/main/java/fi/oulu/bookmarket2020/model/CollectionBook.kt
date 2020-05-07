@@ -39,4 +39,7 @@ interface CollectionBookDao {
 
     @Query("DELETE FROM collection_book WHERE id = :bookId")
     fun delete(bookId: Int)
+
+    @Query("DELETE FROM collection_book WHERE owner_id = :ownerId")
+    fun deleteByOwner(ownerId: Int)
 }

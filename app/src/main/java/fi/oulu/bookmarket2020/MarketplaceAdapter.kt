@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,11 +29,20 @@ class MarketplaceAdapter(
         row.book_author.text = book.author
         row.book_published.text = book.publishYear.toString()
 
-        row.sale_status.text = marketplaceBook.saleBook!!.price.toString() + " €"
+        row.sale_status.text = marketplaceBook.saleBook.price.toString() + " €"
 
         if (book.picturePath != null) {
-            val pictureBitmap = BitmapFactory.decodeFile(book.picturePath)
-            row.book_image.setImageBitmap(pictureBitmap)
+            try {
+
+                val pictureBitmap = BookPictureLoader(applicationContext).load(book)
+
+                if (pictureBitmap != null) {
+                    row.book_image.setImageBitmap(pictureBitmap)
+                }
+            } catch (e: Exception) {
+                val msg = if (e.message != null) e.message!! else "Failed to load bitmap"
+                Log.e("bitmap", msg)
+            }
         }
 
         row.collection_list_items.setOnClickListener {
