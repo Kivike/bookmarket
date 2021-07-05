@@ -102,7 +102,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.appCompatButtonRegister -> postDataToSQLite()
-            R.id.appCompatTextViewLoginLink -> finish()
+            R.id.appCompatTextViewLoginLink -> {
+                Snackbar.make(
+                    nestedScrollView,
+                    "Installing demo data",
+                    Snackbar.LENGTH_LONG
+                ).show()
+                DemoSampleInstaller().install(applicationContext)
+                finish()
+
+            }
         }
     }
 

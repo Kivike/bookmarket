@@ -48,7 +48,7 @@ class BuyBookActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.abb_edit_comment).text = saleBook.comment
 
                     findViewById<ImageView>(R.id.abb_image).setImageBitmap(
-                        BookPictureLoader(applicationContext).load(collectionBook)
+                        BookPictureLoader(applicationContext).load(collectionBook, BookPictureLoader.ImgSize.FULL)
                     )
                 }
             }

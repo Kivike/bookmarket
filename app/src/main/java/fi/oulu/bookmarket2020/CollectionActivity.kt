@@ -21,6 +21,10 @@ import org.jetbrains.anko.uiThread
 
 class CollectionActivity : AppCompatActivity() {
 
+    companion object {
+        const val NAV_FRAGMENT_TAG = "navFragment"
+    }
+
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
@@ -165,7 +169,7 @@ class CollectionActivity : AppCompatActivity() {
         val navFragment = NavFragment()
 
         supportFragmentManager.beginTransaction()
-            .add(navFragment, CollectionAddActivity.SEARCH_FRAGMENT_TAG)
+            .add(navFragment, NAV_FRAGMENT_TAG)
             .commit()
 
         navView.setNavigationItemSelectedListener(navFragment)
@@ -195,37 +199,6 @@ class CollectionActivity : AppCompatActivity() {
     }
 
     private fun addSampleData() {
-        val isbn = "1880418622"
-        val publisherDate = 2004
 
-        doAsync {
-            val session = Session(applicationContext)
-            val userId = session.getLoggedInUser()!!.id!!
-
-            val bookCollections = AppDatabase.get(applicationContext).collectionBookDao()
-
-            // check if the book has been already added or not
-            val getCollectionBooks = bookCollections.getCollectionBooks(userId).size
-
-
-            if (getCollectionBooks < 1) {
-                val collectionBook = CollectionBook(
-                    isbn = isbn,
-                    title = "The Dark Tower VII",
-                    author = "Stephen King",
-                    publishYear = publisherDate,
-                    isRead = true,
-                    picturePath = "drawable://" + R.drawable.darktower7,
-                    saleBookId = null,
-                    ownerId = userId
-                )
-
-                val createEntry = bookCollections.insert(collectionBook)
-                uiThread {
-                    @Suppress("UNUSED_EXPRESSION")
-                    createEntry
-                }
-            }
-        }
     }
 }

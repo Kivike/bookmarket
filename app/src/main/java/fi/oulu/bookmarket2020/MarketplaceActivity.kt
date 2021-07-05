@@ -20,6 +20,10 @@ import org.jetbrains.anko.uiThread
 
 class MarketplaceActivity : AppCompatActivity() {
 
+    companion object {
+        const val NAV_FRAGMENT_TAG = "navFragment"
+    }
+
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
@@ -115,6 +119,11 @@ class MarketplaceActivity : AppCompatActivity() {
         toggle.syncState()
 
         val navFragment = NavFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(navFragment, NAV_FRAGMENT_TAG)
+            .commit()
+
         navView.setNavigationItemSelectedListener(navFragment)
 
         doAsync {
